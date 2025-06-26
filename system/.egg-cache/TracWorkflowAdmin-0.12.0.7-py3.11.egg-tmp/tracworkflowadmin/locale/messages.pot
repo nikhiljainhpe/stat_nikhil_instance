@@ -1,0 +1,370 @@
+# Translations template for TracWorkflowAdmin.
+# Copyright (C) 2020 ORGANIZATION
+# This file is distributed under the same license as the
+# TracWorkflowAdmin project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: TracWorkflowAdmin 0.12.0.6\n"
+"Report-Msgid-Bugs-To: trac@opengroove.com\n"
+"POT-Creation-Date: 2020-02-03 23:11+0900\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:18
+#: tracworkflowadmin/web_ui.py:92
+msgid "Please refer to [1:TracWorkflow] for the setting method of a workflow."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:118
+msgid "Operations in workflow admin"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:120
+msgid "Path to the dot executable"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:122
+msgid "Enable cache of workflow diagram image"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:124
+msgid "Image size in workflow diagram"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:126
+msgid "Font name in workflow diagram"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:128
+msgid "Font size in workflow diagram"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:131
+msgid "Colors of arrows in workflow diagram"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:134
+msgid "Default mode of the workflow editor"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:137
+msgid ""
+"An automatic-updating interval for text mode is specified by a milli "
+"second bit. It is not performed when 0 is specified."
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:13
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:17
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:7
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:16
+#: tracworkflowadmin/web_ui.py:169
+msgid "Workflow Admin"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:321
+#, python-format
+msgid "Line %(num)d: Could not use section."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:325
+#, python-format
+msgid "Line %(num)d: This line is not pair of key and value."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:333
+#, python-format
+msgid "Line %(num)d: There is a same key in line %(num2)d."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:342
+#, python-format
+msgid ""
+"Line %(num)d: Must be \"<action> = <status-list> -> <new-status>\" "
+"format."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:350
+#, python-format
+msgid "Line %(num)d: #%(n)d status is empty."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:356
+#, python-format
+msgid "Line %(num)d: Must be \"<action>.<attribute> = <value>\" format."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:365
+msgid "There is no valid description."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:370
+#, python-format
+msgid ""
+"Line %(num)d: Require \"%(action)s = <status-list> -> <new-status>\" "
+"line."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:530
+#, python-format
+msgid "The dot command '%(path)s' is not available: %(e)s"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:553
+msgid "Leave"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:557
+msgid "Accept"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:562
+msgid "Reassign"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:567
+msgid "Reopen"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:572
+msgid "Resolve"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:602
+msgid ""
+"Invalid request without actions. Please restart your browser and "
+"retry."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:605
+msgid "Need at least one action."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:607
+msgid ""
+"Invalid request without statuses. Please restart your browser and "
+"retry."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:610
+msgid "Need at least one status."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:618
+msgid ""
+"The action with operation 'leave_status' and next status '*' is "
+"certainly required."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:632
+#, python-format
+msgid "Line %(num)d:  The definition of '%(aname)s' is not found."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:637
+#, python-format
+msgid "Line %(num)d: Action cannot be emptied."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:640
+#, python-format
+msgid ""
+"Line %(num)d: Use alphanumeric, dash, and underscore characters in "
+"the action name."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:645
+#, python-format
+msgid "Line %(num)d: Action name is duplicated. The name must be unique."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:650
+#, python-format
+msgid "Line %(num)d: No next status."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:653
+#, python-format
+msgid "Line %(num)d: '%(status)s' is invalid next status."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:657
+#, python-format
+msgid "Line %(num)d: Statuses is empty."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:662
+#, python-format
+msgid "Line %(num)d: Status '%(status)s' is invalid."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:666
+#, python-format
+msgid "Line %(num)d: Unknown operator '%(name)s'"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:672
+#, python-format
+msgid "Line %(num)d: Unknown permission '%(name)s'"
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:679
+#, python-format
+msgid "Line %(num)d: specify a numerical value to 'default'."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:711
+#, python-format
+msgid "Status column %(num)d: Status name is empty."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:714
+#, python-format
+msgid ""
+"Status column %(num)d: The characters '#' and ';' cannot be used for "
+"status name."
+msgstr ""
+
+#: tracworkflowadmin/web_ui.py:718
+#, python-format
+msgid ""
+"Status column %(num)d: Status name is duplicated. The name must be "
+"unique."
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:23
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:54
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:23
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:58
+msgid "Actions"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:25
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:25
+msgid "Move up"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:26
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:26
+msgid "Move down"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:27
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:27
+msgid "Remove"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:31
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:31
+msgid "Columns"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:34
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:56
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:35
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:61
+msgid "Display name"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:37
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:57
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:39
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:62
+msgid "Operations"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:40
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:58
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:43
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:63
+msgid "Permissions"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:43
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:59
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:47
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:64
+msgid "Next status"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:61
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:66
+msgid "Statuses"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:85
+msgid "action"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:86
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:95
+msgid "Action name"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:155
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:184
+msgid "Save changes"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:156
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:185
+msgid "Cancel"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:157
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:186
+msgid "Restore initial state"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:159
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:189
+msgid "Text mode"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:162
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:192
+msgid "GUI mode"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:170
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:198
+msgid "Workflow diagram"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:171
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:200
+msgid "Update"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:171
+#: tracworkflowadmin/templates/jinja2/tracworkflowadmin.html:201
+msgid "Updating..."
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:172
+msgid "diagram"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:178
+msgid "Add new action"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:179
+msgid "Enter new action that consists of alphabet or digits."
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:182
+msgid "Add new status"
+msgstr ""
+
+#: tracworkflowadmin/templates/genshi/tracworkflowadmin.html:183
+msgid "Enter new status name that consists of alphabet or digits."
+msgstr ""
+

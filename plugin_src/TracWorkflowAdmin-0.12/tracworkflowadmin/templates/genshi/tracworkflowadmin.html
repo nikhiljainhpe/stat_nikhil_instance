@@ -1,0 +1,187 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:i18n="http://genshi.edgewall.org/i18n"
+      i18n:domain="tracworkflowadmin">
+
+  <xi:include href="admin.html" />
+
+  <head>
+    <title>Workflow Admin</title>
+  </head>
+
+  <body>
+    <h2>Workflow Admin</h2>
+    <p i18n:msg="">Please refer to <a href="${req.href.wiki('TracWorkflow')}">TracWorkflow</a> for the setting method of a workflow. </p>
+    <form method="post" id="dummy-form" action="${panel_href()}">
+    <py:if test="editor_mode == 'gui'">
+    <div>
+      <fieldset>
+        <legend>Actions</legend>
+        <div>
+          <button id="line-up">Move up</button>
+          <button id="line-down">Move down</button>
+          <button id="line-remove">Remove</button>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend>Columns</legend>
+        <div id="setview">
+          <label for="setview-logname">
+            <input type="checkbox" id="setview-logname" checked="checked" />Display name
+          </label>
+          <label for="setview-operations">
+            <input type="checkbox" id="setview-operations" />Operations
+          </label>
+          <label for="setview-permissions">
+            <input type="checkbox" id="setview-permissions" />Permissions
+          </label>
+          <label for="setview-next-status">
+            <input type="checkbox" id="setview-next-status" checked="checked" />Next status
+          </label>
+        </div>
+      </fieldset>
+    </div>
+    <div id="table-wrapper" style="display:none">
+      <table id="elements">
+        <thead>
+          <tr>
+            <th rowspan="3" class="col-line-select"></th>
+            <th rowspan="3" class="col-action"><!--!
+              -->Actions<img id="add-action" class="ui-icon ui-icon-plusthick"
+                src="${href.chrome('tracworkflowadmin/transparent.gif')}" /></th>
+            <th rowspan="3" class="col-logname">Display name</th>
+            <th rowspan="3" class="col-operations" >Operations</th>
+            <th rowspan="3" class="col-permissions">Permissions</th>
+            <th rowspan="3" class="col-next-status">Next status</th>
+            <th id="status-header-bar" colspan="${len(status)}"><!--!
+              -->Statuses<img id="add-status" class="ui-icon ui-icon-plusthick"
+              src="${href.chrome('tracworkflowadmin/transparent.gif')}" /></th>
+          </tr>
+          <tr id="status-editor-1">
+            <th py:for="stat in status"
+                class="editable"><span>${stat}</span><input type="text" value="${stat}" /><a href="#top">×</a></th>
+          </tr>
+          <tr id="status-editor-2">
+            <th py:for="stat in status">&#8203;<!--!
+              --><img class="ui-icon ui-icon-arrowthick-1-w left-status"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}" /><!--!
+              --><img class="ui-icon ui-icon-arrowthick-1-e right-status"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}" /><!--!
+              --><img class="ui-icon ui-icon-close del-status"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}" /><!--!
+            --></th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td class="col-line-select">&#8203;<!--!
+              --><img class="ui-icon ui-icon-play"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+              /></td>
+            <td class="editable col-action"><span>action</span><input type="text" value="action" /><a href="#top">×</a></td>
+            <td class="editable col-logname"><span >${dgettext('tracworkflowadmin', 'Action name')}</span><input type="text" value="${dgettext('tracworkflowadmin', 'Action name')}" /><a href="#top">×</a></td>
+            <td class="col-operations selectable">
+              <select multiple="multiple">
+                <option py:for="op in operations">${op}</option>
+              </select>
+            </td>
+            <td class="col-permissions selectable">
+              <select multiple="multiple"><!--! first item is "All users" -->
+                <option py:for="idx, perm in enumerate(perms)"
+                        selected="${idx == 0 and 'selected' or None}">${perm}</option>
+              </select>
+            </td>
+            <td class="col-next-status selectable">
+              <select>
+                <option>*</option>
+                <option py:for="stat in status">${stat}</option>
+              </select>
+            </td>
+            <td class="col-before-status status-checked">&#8203;<!--!
+              --><img class="ui-icon ui-icon-check"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+              /></td>
+          </tr>
+        </tfoot>
+        <tbody>
+          <tr py:for="action in actions">
+            <td class="col-line-select">&#8203;<!--!
+              --><img class="ui-icon ui-icon-play"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+              /></td>
+            <td class="editable col-action"><span>${action['action']}</span><input type="text" value="${action['action']}" /><a href="#top">×</a></td>
+            <td class="editable col-logname"><span>${action['name']}</span><input type="text" value="${action['name']}" /><a href="#top">×</a></td>
+            <td class="col-operations selectable">
+              <select multiple="multiple">
+                <option py:for="op in action['operations']" selected="selected">${op}</option>
+                <option py:for="op in operations"
+                        py:if="not op in action['operations']">${op}</option>
+              </select>
+            </td>
+            <td class="col-permissions selectable">
+              <select multiple="multiple">
+                <option py:for="perm in perms"
+                        selected="${action['permissions'] and perm in action['permissions'] or None}">${perm}</option>
+              </select>
+            </td>
+            <td class="col-next-status selectable">
+              <select>
+                <option>*</option>
+                <option py:for="stat in status"
+                        selected="${action['next'] == stat or None}">${stat}</option>
+              </select>
+            </td>
+            <td py:for="stat in status"
+                class="${(stat in action['before'] or '*' in action['before'])
+                         and 'col-before-status status-checked'
+                         or 'col-before-status'
+                        }">&#8203;<!--!
+              --><img class="ui-icon ui-icon-check"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+            /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </py:if>
+    <p py:if="editor_mode == 'text'">
+      <textarea id="text-data" name="text-data" cols="80" rows="15">${text}</textarea>
+    </p>
+    <p>
+      <input id="submit-button" type="submit" value="${dgettext('tracworkflowadmin', 'Save changes')}" />
+      <input id="reset-button" type="submit" value="${dgettext('tracworkflowadmin', 'Cancel')}" />
+      <input id="init-button" type="submit" value="${dgettext('tracworkflowadmin', 'Restore initial state')}" />
+      <py:choose test="editor_mode">
+        <input py:when="'gui'"
+               id="textmode-button" type="submit"
+               value="${dgettext('tracworkflowadmin', 'Text mode')}" />
+        <input py:when="'text'"
+               id="guimode-button" type="submit"
+               value="${dgettext('tracworkflowadmin', 'GUI mode')}" />
+      </py:choose>
+    </p>
+    </form>
+    <div class="warning system-message" style="display:none"></div>
+    <fieldset id="chart-area">
+      <legend>Workflow diagram</legend>
+      <p><button id="chart-update-button">Update</button><span id="chart-update-status">Updating...</span></p>
+      <div id="image-area" style="display:none"><img alt="diagram" /></div>
+    </fieldset>
+    <form id="main-form" method="post" action="${panel_href()}"><p>
+      <input id="editor-mode" name='editor_mode' type="hidden" value="${editor_mode}" />
+      <textarea name="params" rows="4" cols="4"></textarea>
+    </p></form>
+    <div id="new-action-input-dialog" class="dialog" title="Add new action">
+      <p>Enter new action that consists of alphabet or digits.</p>
+      <input class="trac-fullwidth" />
+    </div>
+    <div id="new-status-input-dialog" class="dialog" title="Add new status">
+      <p>Enter new status name that consists of alphabet or digits.</p>
+      <input class="trac-fullwidth" />
+    </div>
+  </body>
+</html>

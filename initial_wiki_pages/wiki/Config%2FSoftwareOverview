@@ -1,0 +1,14 @@
+## Software Overview	
+
+Based on recipe [24.08](https://support.hpe.com/connect/s/softwaredetails?collectionId=MTX-ef1e5fbf15ae4aab)
+
+|PRODUCT|VERSION|
+|-------|-------|
+|Red Hat Enterprise Linux|	9.4(compute) 8.9(management)|
+|HPE Performance Cluster Manager (HPCM)|1.11 (NOTE: updgrade to 1.12 under review) |
+|HPE Cray Programming Environement for HPCM|	24.07 RHEL (x86_64) |
+|HPE Slingshot Fabric Management Software|	2.2|
+|HPE Slingshot Host Software|11.0.0|
+|HPE HPC Firmware Pack|24.8.1|
+|AMD ROCm|6.1 (RHEL9)|
+|AMDGPU Driver|6.1 (RHEL9)|

@@ -1,0 +1,578 @@
+/* Reset default margins and paddings */
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* General body styles */
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    font-family: 'MetricWeb', normal;
+    font-size: 15px;
+    line-height: 1.42857143;
+}
+
+/* Completely remove the search bar in the banner to remove the gap */
+#banner form#search {
+    display: none;
+}
+
+/* Page background set to white */
+body {
+    background-color: white !important;
+    padding-bottom: 40px;
+}
+
+/* Ensure no margins or padding around the header and its containers */
+#header, #header-container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Hide logo */
+#logo {
+    display: none;
+}
+#footer {
+    display: none;
+}
+
+#logo img {
+    height: 100%;
+    width: auto;
+}
+
+/* Restore .myDiv2 formatting */
+.myDiv2 {
+    font-weight: 600;
+    font-size: 22px;
+    color: white;
+    display: flex;
+    align-items: center;
+    background-color: #333333;
+    white-space: nowrap;
+    margin-right: 0;
+    padding: 0px 20px;
+    height: auto;
+}
+.myDiv3 {
+    background-color: #333333;
+    color: white;
+}
+.system-name {
+    margin-left: auto;  /* Pushes the system name to the right */
+    font-size: 28px;
+}
+
+/* Logo inside .myDiv2 */
+.myDiv2 img {
+    width: auto;
+}
+
+/* Title inside .myDiv2 */
+.myDiv2 span {
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+/* Main navigation bar */
+#mainnav {
+    background-color: #333333;
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    padding: 0;
+    margin: 0;
+    height: 25px;
+    width: 100%;
+    font-family: 'MetricWeb', normal;
+    text-transform: none;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+}
+
+/* Remove spacing between buttons */
+#mainnav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-grow: 1;
+    font-size: 18px !important;
+}
+
+/* Align buttons to the left and remove spacing */
+#mainnav li {
+    margin: 0;
+    padding: 0;
+    background-color: #333333;
+}
+
+/* Remove rounded corners and borders from mainnav buttons */
+#mainnav li, #mainnav li a {
+    border-radius: 0 !important;
+    border: none !important;
+    margin: 0;
+    
+}
+
+/* Change inactive button text color to white */
+#mainnav li a:link, #mainnav li a:visited {
+    color: white !important;
+    text-decoration: none;
+    padding: 1px 8px;
+
+}
+
+/* Reduce font size and padding for buttons to fit 50% height reduction */
+#mainnav li a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    padding: 1px 8px;
+    background-color: #333333;
+    height: 100%;
+    font-family: 'MetricWeb', normal;
+    font-weight: "300";
+    text-transform: none;
+}
+
+/* Active button styling */
+#mainnav li.active a {
+    background-color: white;
+    color: #333333;
+    padding: 1px 8px;
+    font-size: 12px;
+}
+
+/* Hover button styling */
+#mainnav li:hover a {
+    background-color: white;
+    color: #333333;
+    padding: 1px 8px;
+    font-size: 12px;
+    border: none !important; /* Ensure no borders on hover */
+    box-shadow: none !important; /* Prevent any extra shadow from being applied */
+}
+#mainnav :link:hover, #mainnav :visited:hover {
+    padding: 1px 8px;
+}
+/* Ensure the search box is visible and right-aligned in the navbar 
+#mainnav form#navbar-search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 12px;
+}
+*/
+#mainnav input[type="text"] {
+    display: inline-block;
+    width: 120px;
+    height: 18px;
+    padding: 2px;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    background-color: white;
+    color: #333333;
+}
+
+/* Remove inline styling for search button */
+#mainnav input[type="submit"] {
+    display: none;
+}
+
+/* Set metanav background to #333333 */
+#metanav {
+    background-color: #333333;
+    border: none;
+    color: white;
+}
+
+/* General font and content styling */
+body, th, tr {
+    font-family: 'MetricWeb', normal;
+    font-size: 15px;
+    font-weight: 300 ;
+}
+
+/* Section header styling */
+h1, h2, h3, h4 {
+    font-weight: 400;
+    letter-spacing: -0.018em;
+}
+
+h1 {
+    font-size: 1.8em;
+    margin: .15em 1em 0.5em 0;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+/* Removed gradient completely from h2.section */
+h2.section {
+    font-size: 1.6em;
+/*    color: RGB(1, 169, 130); */
+    color : #000000 ;
+    margin-top: 1.4em;
+    padding: 0.2em 0.3em 1em 0.5rem;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0, rgba(239, 239, 239, .4) .4em, rgba(215, 215, 215, .4) .79em, RGB(1, 169, 130) .8em,  RGB(1, 169, 130) .9em,  rgba(255, 255, 255, 0) .9em, rgba(255, 255, 255, 0) 100%) ;
+}
+h1.section {
+    font-size: 1.8em;
+/*    color: RGB(1, 169, 130);*/
+    color : #000000 ;
+    padding-left: .5rem;
+}
+h3.section {
+    font-size: 1.3em;
+/*    color: RGB(1, 169, 130);*/
+    color : #000000 ;
+    font-weight: 600;
+    margin-top: 1.4em;
+    margin-bottom: 1em;
+    padding: .2em .3em 1em .5rem;
+    background: linear-gradient(to top, rgba(255, 255, 255, 0) 0, rgba(239, 239, 239, .4) .4em, rgba(215, 215, 215, .4) .79em, RGB(1, 169, 130) .8em,  RGB(1, 169, 130) .9em,  rgba(255, 255, 255, 0) .9em, rgba(255, 255, 255, 0) 100%) ;
+}
+
+
+
+/* Table styling */
+table, td {
+    border: 1px solid !important;
+    padding: 5px !important;
+    text-align: center !important;
+    margin-bottom: 10px !important;
+}
+
+/* Table header (th) styling */
+th {
+    border: 1px solid !important;
+    background: #cccccc !important;
+    padding: 5px !important;
+    text-align: center !important;
+}
+
+/* Ticket box styling */
+#ticketbox {
+    background: #ddd !important;
+    border: 1px solid #ccc;
+}
+
+#ticketbox table.properties > tbody > tr > th.missing {
+    color: #c14643;
+}
+
+/* Change log and ticket change header styling */
+#changelog h3:target, #ticketchange h3:target {
+    background: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(234, 234, 234, 0.21) 0.3em, rgba(198, 198, 198, 0.21) 0.7em, #c7c5c5 0.8em, #b6fff9 0.8em, #b6fffc 100%) !important;
+    box-shadow: none;
+}
+
+/* Ticket description header styling */
+#ticketbox div.description h2 {
+    border-bottom: 1px solid #ddd;
+    color: #666;
+}
+
+/* Code block styling */
+code {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+    border-radius: 4px;
+    display: inline-block;
+    font-family: 'SimRg';
+    font-size: 0.9em;
+}
+
+pre.wiki {
+    color: #ffffff !important;
+    background-color: #000000 !important;
+    border-radius: 4px;
+    display: inline-block;
+    border: 1px solid #01a982;
+    font-family: 'SimRg';
+}
+
+/* Color for links from blueflat */
+:link, :visited {
+    color: #01a982;
+}
+
+/* Make sure no border for links */
+:link, :visited {
+    border-bottom: 0px;
+}
+
+/* Print media settings */
+@media print {
+    *,:before,:after {
+        color: #000 !important;
+        text-shadow: none !important;
+        background: transparent !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+    }
+    
+    img {
+        page-break-inside: avoid;
+        max-width: 100% !important;
+    }
+}
+
+/* Ticket form fieldset styling */
+fieldset {
+    box-shadow: none;
+    background-color: inherit;
+    border-radius: 0em;
+    margin-bottom: 1em;
+}
+
+legend {
+    border-bottom: 0px;
+    margin-bottom: 0.25em;
+    margin-left: 0px;
+    font-weight: normal;
+    font-size: 125%;
+}
+
+/* Form label styling */
+label {
+    margin-top: 5px;
+    font-weight: normal;
+}
+
+form label, form input {
+    display: inline-block;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    margin-top: -4px;
+}
+
+/* Form buttons */
+input[type="button"], input[type="submit"], input[type="reset"] {
+    margin-bottom: 1px;
+    padding-bottom: 0px;
+    background: #FAFAFA;
+    color: #333;
+    border: 1px solid #CCC;
+    padding: .1em .5em;
+    border-radius: 0px;
+    border-bottom-color: #BBB;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover {
+    background: #FAFAFF;
+    border-bottom: 1px solid #6A8FE2;
+    box-shadow: 0 3px 3px rgba(106, 143, 226, 0.8);
+}
+/* Input fields styling */
+input[type="text"], #ticket, #properties .trac-resizable .wikitext {
+    border-radius: 0em;
+/*    width: 100%;*/
+}
+
+/* Fieldset within forms */
+#content.report form, #content.browser form, #content .buttons form, #ticket form, #changelog form {
+    padding: 0em;
+    background-color: inherit;
+    border: 0px;
+}
+
+#content.report {
+    width: 80% ;
+    margin: auto;
+}
+
+/* Blockquote styling */
+blockquote {
+    font-size: 100%;
+    padding: 0 .5em;
+}
+
+blockquote p:last-child, blockquote ul:last-child, blockquote ol:last-child {
+    margin-bottom: 10px;
+}
+
+/* Blockquote styling */
+blockquote {
+    font-size: 100%;
+    padding: 0 .5em;
+}
+
+/* Ticket description header styling */
+#ticketbox div.description h2 {
+    border-bottom: 1px solid #ddd;
+    color: #666;
+}
+
+/* Hover button styling */
+#main .btn:hover {
+    background-color: #FAFAFF;
+    box-shadow: 0 3px 3px rgba(106, 143, 226, 0.8);
+}
+
+/* Input form styles for buttons */
+input[type="submit"], input[type="reset"] {
+    margin-bottom: 1px;
+    padding-bottom: 0px;
+    background: #FAFAFA;
+    color: #333;
+    border: 1px solid #CCC;
+    padding: .1em .5em;
+    border-radius: 0px;
+    border-bottom-color: #BBB;
+    box-shadow: none;
+    text-shadow: none;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background: #FAFAFF;
+    border-bottom: 1px solid #6A8FE2;
+    box-shadow: 0 3px 3px rgba(106, 143, 226, 0.8);
+}
+
+/*#topsearch label {
+    display: inherit;
+}
+*/
+/* Admin page */
+#content.admin h1 {
+    float: none;
+    padding-bottom: 0; /* Because we may include browser.css for project file page */
+}
+#tabcontent{
+  margin-top: 16px;
+}
+
+#tabs{
+  background-color: #F5F5F5;
+  border: 1px solid #E3E3E3;
+  border-radius: 0em;
+  box-shadow: none;
+}
+
+.plugin{
+  border-radius: 0em;
+  box-shadow: none;
+  background-color: #fcfcfc;
+  margin: 0;
+}
+
+/* Browser page */
+#diffrev label {
+    margin-top: 2px;
+}
+
+#content.ticket {
+  width: 80%;
+  margin: auto;
+}
+
+#content.timeline {
+  width: 80%; 
+  margin: auto;
+}
+#content.search{
+  width: 80%; 
+  margin: auto;
+  background: #f5f5f5;
+  
+}
+p.filters {
+margin: auto;
+}
+
+form#prefs {
+  background: #f5f5f5;
+  border-radius: 0px !important;
+}
+.timeline dt em {
+    color: #01a982 !important;
+}
+.milestone .info h2 em {
+    color: #01a982 ;
+    font-style: normal;
+}
+.milestones {
+    padding: 0;
+    width: 80%;
+    margin: auto;
+}
+.report div.reports {
+    clear: both;
+    padding: 0;
+    width: 80%;
+    margin: auto;
+   
+}
+.report div.reports h3 em {
+    color: #01a982 ;
+    font-style: normal;
+}
+.report div.reports h2 {
+    padding: 0.2em .3em .1em 0;
+    border-bottom: 2pt solid #01a982;
+    box-shadow: .2em .3em .5em 0 #f6f6f6;
+}
+
+select {
+    background: none;
+    border-radius: none;
+    padding-bottom: .15em;
+}
+input, select, button {
+    font-style: normal;
+    font-size: .9em;
+    font-family: MetricWeb;
+}
+textarea {
+    white-space: pre-wrap;
+    font-size: 1em;
+    font-family: MetricWeb; 
+}
+.wiki-toc {
+    padding: .5em 1em;
+    margin: 0 0 2em 1em;
+    float: right;
+    clear: right;
+    border: 1px solid #ddc;
+    border-radius: .4em;
+    box-shadow: .1em .3em .5em 0 #d4d4d4;
+    background: #f5f5f5;
+    font-size: 85%;
+    position: relative;
+    margin-left: 5px;
+    
+}
+h1 :link, h1 :visited, h2 :link, h2 :visited, h3 :link, h3 :visited, h4 :link, h4 :visited, h5 :link, h5 :visited, h6 :link, h6 :visited {
+    color: #01a982 ;
+}
+
+#ticketbox > h1, #ticketbox > h2 {
+    color: #01a982 ;
+}
+
+#content.narrow #wikipage {
+ max-width: 80%;
+}
+
+/* End of style.css */
+

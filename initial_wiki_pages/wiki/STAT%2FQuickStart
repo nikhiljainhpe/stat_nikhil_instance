@@ -1,0 +1,39 @@
+# Quick Start
+## Add Users 
+* Add users by running the following on the command line: 
+    * If no users currently exist:
+```
+htpasswd -c /opt/stat/.htpasswd <USERNAME>`
+```
+    * For additional users: 
+```
+htpasswd /opt/stat/.htpasswd <USERNAME>
+```
+* Grant a user admin priviliges: 
+```
+/opt/stat/python3/bin/trac-admin /opt/stat/system permission add <USERNAME> TRAC_ADMIN
+```
+
+## Change site name 
+If granted admin privileges, goto Menu bar above -> Admin -> 
+
+## Add wiki pages 
+* To add wiki pages you need to have a an account, and be logged in. 
+* In the URL bar enter the URL for the page you'd like to create. For example the page `Config/Monitoring/test` you need to enter the url [/wiki/Config/Monitoring/test]
+Wiki pages are currently configured to automatically use markdown syntax for any wiki page that starts with `Config`, `HPEBestPractice`, or `STAT`. 
+This is set in `/opt/stat/system/conf/trac.ini`.
+
+Optionally Markdown syntax can be used in other paths, and it tickets if surrounded by:
+```
+{{{#!Markdown
+Content goes here
+}}}
+```
+
+## Tickets 
+Tickets can be logged either via the 'New Ticket' button above, or via the command line
+Ticket fields, priorities etc. can all be set via the Admin menu above.
+
+All Trac documentation, including a full guide to the ticketing system is included here: [[wiki:TracGuide]]
+
+

@@ -1,0 +1,86 @@
+## Overview
+This process enables product documentation to viewable via web access from the admin node. 
+
+**NOTE: This process and accociated software is not part of HPCM, or shipped as part of HPCM. Not support is implied of given.**
+It is currently undergoing evaluation and is only used oduring deployment by HPE employees.
+
+## Create some directories 
+```
+cd /opt/clmgr/doc/
+mkdir -p Software/HPCM/
+mv * Software/HPCM/
+mkdir Hardware
+```
+Add other product docs as needed
+## Make it pretty
+
+* untar fancy-index.tgz to /opt/clmgr/doc/
+
+```
+cd /opt/clmgr/doc 
+tar xvf fancy-index.tgz 
+```
+from: [https://github.com/Vestride/fancy-index]
+
+
+## Fix index.html
+
+Replace document bits of `/opt/clmgr/www/index.html` with paths to Hardware and Software
+```diff
+--- index.html.old	2024-08-07 16:33:02.859025555 +0000
++++ index.html	2024-08-07 16:44:21.729660799 +0000
+@@ -220,21 +220,9 @@
+                 <Header>
+                   <Title>Documentation</Title>
+                 </Header>
+-                <table><tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/HPCM_Getting_Started_Guide.pdf" target="_blank">Getting Started</a>
+-                  </td><td><DocumentUserIcon colorIndex="brand"/></td><td><a href="./doc/HPCM_Inst_Quick_Start.pdf" target="_blank">Quick Start Installation Guide</a>
+-                  </td></tr>
+-                  <tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/HPCM_Inst_Guide_NO_Leaders.pdf" target="_blank">Installation Guide (no leader nodes)</a>
+-                  </td><td><DocumentUserIcon colorIndex="brand"/></td><td><a href="./doc/HPCM_Cmd_Reference.pdf" target="_blank">Command Reference Guide</a>
+-                  </td></tr>
+-                  <tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/HPCM_Inst_Guide_ICE_Leaders.pdf" target="_blank">Installation Guide (ICE leader nodes)</a>
+-                  </td><td><DocumentUserIcon colorIndex="brand"/></td><td><a href="./doc/HPCM_Admin_Guide.pdf" target="_blank">Administration Guide</a>
+-                  </td></tr>
+-                  <tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/HPCM_Inst_Guide_SU_Leaders.pdf" target="_blank">Installation Guide (SU leader nodes)</a>
+-                  </td><td><DocumentUserIcon colorIndex="brand"/></td><td><a href="./doc/HPCM_Upgrade_Guide.pdf" target="_blank">Upgrade Guide</a>
+-                  </td></tr>
+-                  <tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/HPCM_Monitor_Guide.pdf" target="_blank">Monitoring Guide</a>
+-                  </td><td><DocumentUserIcon colorIndex="brand"/></td><td><a href="./doc/HPCM_Power_Mgmt_Guide.pdf" target="_blank">Power Management Guide</a>
+-                  </td></tr>
++                <table>
++		<tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/Software" target="_blank">Software Library</a> </td></tr>
++		<tr><td><DocumentUserIcon colorIndex="brand"/><a href="./doc/Hardware" target="_blank">Hardware Library</a> </td></tr>
+                 </table></p>
+               </Box>
+               <Box pad={{horizontal: 'large'}}>
+```
+### Update Apache (SLES15SP5)
+* create `/opt/apach2/conf.d/doc.conf`
+```
+Alias /doc /opt/clmgr/doc
+<Directory /opt/clmgr/doc/>
+  Options Indexes FollowSymlinks
+  AllowOverride All
+  order allow,deny
+  allow from all
+  Require all granted
+</Directory>
+```
+
+* add to `/opt/apache2/conf.d/gateway-proxy.conf` after `ProxyRequests Off` to stop grizzly handling it
+```
+  ProxyPass "/doc" "!"
+  ProxyPassReverse "/doc" "!"
+# optional as default config breaks grabbing of the 'blank' image used in directory indexing"
+  ProxyPass "/icons" "!"
+  ProxyPassReverse "/icons" "!"
+```
+
+* restart Apache
+```
+systemctl restart apache2
+```
+
+###
+**NOTE: you can reference specific pages in PDFs by adding `#page=<NUMBER>` to the url**

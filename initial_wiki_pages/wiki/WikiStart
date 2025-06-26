@@ -1,0 +1,34 @@
+[[PageOutline(2-5, Contents, pullout)]]
+
+== Welcome to STAT ==
+Welcome to STAT! 
+
+STAT is a pre-configured, pre-packaged and customized version of https://trac.edgewall.org/.
+It comes packaged with additonal HPC system integration plugins and tools.
+
+STAT is enhanced wiki and issue tracking system, with both web and command line user interfaces.
+== Links ==
+
+* [[wiki:STAT/QuickStart]]
+* [[report:1|Open Tickets]]
+* [[wiki:OldWikiStart|Trac Wiki Start Page]]
+== HPE Documentation ==
+
+=== Product Documentation Library ===
+
+* [//doc/Hardware Hardware]
+* [//doc/Software Software]
+see [[wiki:HPEBestPractice/HPCM/ProductDocumentRepository]]
+=== STAT ===
+[[TitleIndex(STAT,hideprefix,format=group)]]
+=== Deployment Best Practice ===
+
+[[TitleIndex(HPEBestPractice,hideprefix,format=group,exclude=HPEBestPractice/HPCM/*)]]
+
+**HPCM**
+[[TitleIndex(HPEBestPractice/HPCM,hideprefix,format=group)]]
+== Site Specific Documentation == 
+Put your site specic documentation here. 
+Pages prefixed with `/wiki/Config` are automatically rendered as markdown and are listed below. 
+[[TitleIndex(Config,hideprefix,format=group,exclude=Config/files/*)]]
+

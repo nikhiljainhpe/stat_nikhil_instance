@@ -1,0 +1,47 @@
+## Hybrid post-install scirpts.
+**NOTE: This is not an official HPCM documented proceedure**
+
+HPCM has multiple ways of managing configuration for images:
+
+* in image (should only contain rpms installed from HPCM repos)
+* via overrides
+* via post-install scripts.
+
+Overrides, while easy to manage, are tied to specific images.
+ 
+Post-install scripts can be more finely targetted but usually use  heredocs to create files, which can obfuscate script flow. Additionally a single type in a post-install script can stop nodes from booting.
+
+
+It's common practice to create `SXXall.script` which can be overly broad in they're application. 
+
+Hybrid post-install scripts contain the following:
+
+* an 'unrunable' post-install script i.e. one without 'SXX' at the beginning of the scriptname.
+* a directory with files to copy to the node(s)
+* symlinks from runnable script names to the unrunable script
+
+Example:
+```
+cd /opt/clmgr/image/scripts/post-install
+mkdir -p test/etc/app/
+mkdir -p test/etc/root/
+cp <app_config_file> test/etc/app/
+cp <other_file> test/root/
+
+cat << EOF >> test.sh
+#!/bin/bash
+rsync -avh $(dirname $0)/test/* /
+
+# do other scripty stuff" 
+
+EOF
+
+ln -s test.sh S85nid.test
+ln -s test.sh S85login.test
+```  
+
+```
+su-sync-image
+```
+and will then automatically be pulled in on the next provision, which for diskless nodes is every reboot. 
+

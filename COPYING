@@ -1,0 +1,21 @@
+# STAT contents and licences 
+
+## Overview
+
+STAT is a prepackage for easy distribution, collection of :
+* The trac project (https://trac.edgewall.org/)
+* Various 3rd party trac plugins
+* Custom plugins written by HPE
+* Third party utilities
+* Scripts and configuration to integrate with HPE products
+* pre-shipped HPE documentation
+
+## Licences 
+
+As defined in the GPLv3 and 'project' that links with any code licenced under the GPLv3 must also be licecned under the GPLv3. therefore trac and all plugins are released under the GPLv3, this included plugins written by HPE.
+
+Code not directly linked, i.e that access the 'project' via APIs or command line options etc. are not subject to GPLv3 linked code clause and are therefore released under their respective licences.
+
+HPE written utilities, configuraion files, shipped with the rpm can be assumed to be released under the GPLv3, unless otherwise stated within the source.
+
+Data shipped (wiki pages etc.) withing the packaged STAT distribution that are not shipped with the original trac distribution that the are copyright HPE, and should not be reprouced, shared or transmitted outside of HPE or it's customer without express permission from HPE. 

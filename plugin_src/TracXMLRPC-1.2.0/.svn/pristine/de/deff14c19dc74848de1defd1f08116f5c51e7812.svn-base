@@ -1,0 +1,211 @@
+# Japanese translations for TracXMLRPC.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the TracXMLRPC project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TracXMLRPC 1.2.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-05-16 11:48+0900\n"
+"PO-Revision-Date: 2024-05-16 09:26+0900\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ja\n"
+"Language-Team: ja <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.15.0\n"
+
+#: tracrpc/json_rpc.py:163
+#, python-format
+msgid ""
+"Example `POST` request using `curl` with `Content-Type` header\n"
+"and body:\n"
+"\n"
+"{{{\n"
+"user: ~ > cat body.json\n"
+"{\"params\": [\"WikiStart\"], \"method\": \"wiki.getPage\", \"id\": 123}\n"
+"user: ~ > curl -H \"Content-Type: application/json\" --data @body.json "
+"%(url_anon)s\n"
+"{\"id\": 123, \"error\": null, \"result\": \"= Welcome to....\n"
+"}}}\n"
+"\n"
+"Implementation details:\n"
+"\n"
+"  * JSON-RPC has no formalized type system, so a class-hint system is "
+"used\n"
+"    for input and output of non-standard types:\n"
+"    * `{\"__jsonclass__\": [\"datetime\", \"YYYY-MM-DDTHH:MM:SS\"]} => "
+"DateTime (UTC)`\n"
+"    * `{\"__jsonclass__\": [\"binary\", \"<base64-encoded>\"]} => Binary`"
+"\n"
+"  * `\"id\"` is optional, and any marker value received with a\n"
+"    request is returned with the response."
+msgstr ""
+"`curl` を使って `Content-Type` ヘッダとデータを `POST` リクエストする例です。\n"
+"\n"
+"{{{\n"
+"user: ~ > cat body.json\n"
+"{\"params\": [\"WikiStart\"], \"method\": \"wiki.getPage\", \"id\": 123}\n"
+"user: ~ > curl -H \"Content-Type: application/json\" --data @body.json "
+"%(url_anon)s\n"
+"{\"id\": 123, \"error\": null, \"result\": \"= Welcome to....\n"
+"}}}\n"
+"\n"
+"実装の詳細:\n"
+"\n"
+"  * JSON-RPC には正式な型システムがないため、標準でない型の入出力にクラスヒントを使います。\n"
+"    * `{\"__jsonclass__\": [\"datetime\", \"YYYY-MM-DDTHH:MM:SS\"]} => "
+"DateTime (UTC)`\n"
+"    * `{\"__jsonclass__\": [\"binary\", \"<base64-encoded>\"]} => Binary`"
+"\n"
+"  * `\"id\"` は省略可能です。リクエストで渡した値が目印としてレスポンスに戻ってきます。"
+
+#: tracrpc/web_ui.py:244
+msgid "API"
+msgstr "API"
+
+#: tracrpc/xml_rpc.py:67
+#, python-format
+msgid ""
+"There should be XML-RPC client implementations available for all\n"
+"popular programming languages.\n"
+"Example call using `curl`:\n"
+"\n"
+"{{{\n"
+"user: ~ > cat body.xml\n"
+"<?xml version=\"1.0\"?>\n"
+"<methodCall>\n"
+"<methodName>wiki.getPage</methodName>\n"
+"<params>\n"
+"<param><string>WikiStart</string></param>\n"
+"</params>\n"
+"</methodCall>\n"
+"\n"
+"user: ~ > curl -H \"Content-Type: application/xml\" --data @body.xml "
+"%(url_anon)s\n"
+"<?xml version='1.0'?>\n"
+"<methodResponse>\n"
+"<params>\n"
+"<param>\n"
+"<value><string>= Welcome to....\n"
+"}}}\n"
+"\n"
+"The following snippet illustrates how to perform authenticated calls in "
+"Python.\n"
+"\n"
+"{{{\n"
+">>> try:\n"
+"...     from xmlrpc import client as cli\n"
+"... except ImportError:\n"
+"...     import xmlrpclib as cli\n"
+"...\n"
+">>> p = cli.ServerProxy(%(url_auth)r)\n"
+">>> p.system.getAPIVersion()\n"
+"%(version)r\n"
+"}}}"
+msgstr ""
+"大抵のプログラム言語には XML-RPC クライアント実装があるはずです。\n"
+"`curl` を使った呼び出し例:\n"
+"\n"
+"{{{\n"
+"user: ~ > cat body.xml\n"
+"<?xml version=\"1.0\"?>\n"
+"<methodCall>\n"
+"<methodName>wiki.getPage</methodName>\n"
+"<params>\n"
+"<param><string>WikiStart</string></param>\n"
+"</params>\n"
+"</methodCall>\n"
+"\n"
+"user: ~ > curl -H \"Content-Type: application/xml\" --data @body.xml "
+"%(url_anon)s\n"
+"<?xml version='1.0'?>\n"
+"<methodResponse>\n"
+"<params>\n"
+"<param>\n"
+"<value><string>= Welcome to....\n"
+"}}}\n"
+"\n"
+"以下のコードは、Python による認証ありでの呼び出し方法です。\n"
+"\n"
+"{{{\n"
+">>> try:\n"
+"...     from xmlrpc import client as cli\n"
+"... except ImportError:\n"
+"...     import xmlrpclib as cli\n"
+"...\n"
+">>> p = cli.ServerProxy(%(url_auth)r)\n"
+">>> p.system.getAPIVersion()\n"
+"%(version)r\n"
+"}}}"
+
+#: tracrpc/templates/rpc_jinja.html:4
+msgid "Remote Procedure Call (RPC)"
+msgstr "リモートプロシージャーコール (RPC)"
+
+#: tracrpc/templates/rpc_jinja.html:15
+msgid "Installed API version:"
+msgstr "インストールされている API のバージョン:"
+
+#: tracrpc/templates/rpc_jinja.html:16
+msgid "Protocol reference:"
+msgstr "プロトコルリファレンス:"
+
+#: tracrpc/templates/rpc_jinja.html:18
+msgid ""
+"Below you will find a detailed description of all the RPC protocols "
+"installed in this environment. This includes supported content types as "
+"well as target URLs for anonymous and authenticated access. Use this "
+"information to interact with this environment from a remote location."
+msgstr ""
+"下記は、この環境でインストールされている RPC プロトコルの詳細です。匿名ユーザとログインユーザ向けにサポートしているコンテンツタイプと URL"
+" があります。この情報を用いて、リモートからこの環境を操作してください。"
+
+#: tracrpc/templates/rpc_jinja.html:25
+msgid ""
+"Libraries for remote procedure calls and parsing exists for most major "
+"languages and platforms - use a tested, standard library for consistent "
+"results."
+msgstr "リモートプロシージャコールのライブラリが多くの主要なプログラム言語やプラットホームで存在しています。正しい結果を得るためにテストされている標準ライブラリを使用してください。"
+
+#: tracrpc/templates/rpc_jinja.html:34
+#, python-format
+msgid "For %(name)s protocol, use any one of:"
+msgstr "%(name)s プロトコルの場合、以下の何れかを使います:"
+
+#: tracrpc/templates/rpc_jinja.html:39
+#, python-format
+msgid "%(header)s header with request to:"
+msgstr "%(header)s ヘッダを付けてリクエスト:"
+
+#: tracrpc/templates/rpc_jinja.html:43
+msgid "For anonymous access:"
+msgstr "匿名ユーザの場合:"
+
+#: tracrpc/templates/rpc_jinja.html:53
+msgid "For authenticated access:"
+msgstr "ログインユーザの場合:"
+
+#: tracrpc/templates/rpc_jinja.html:74
+msgid "RPC exported functions"
+msgstr "RPC で使用できる関数"
+
+#: tracrpc/templates/rpc_jinja.html:87
+msgid "Function"
+msgstr "関数"
+
+#: tracrpc/templates/rpc_jinja.html:88
+msgid "Description"
+msgstr "説明"
+
+#: tracrpc/templates/rpc_jinja.html:89
+msgid "Permission required"
+msgstr "必要な権限"
+
+#: tracrpc/templates/rpc_jinja.html:97
+msgid "By resource"
+msgstr "リソースによる"
+

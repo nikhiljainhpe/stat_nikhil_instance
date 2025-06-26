@@ -1,0 +1,39 @@
+{
+    "tcf_brand": {
+        "Nokia": {
+            "tcf_phone":{
+                "5800": {
+                    "tcf_os":{
+                        "Symbian": {},
+                        "Android": {}
+                    }
+                }
+            }
+        },
+        "SE": {
+            "tcf_phone":{
+                "": {
+                    "tcf_os":{
+                        "": {}
+                    }
+                }
+            }
+        },
+        "Apple": {
+            "tcf_phone":{
+                "iPhone": {
+                    "tcf_os":{
+                        "OS X": {},
+                        "OS": {}
+                    }
+                },
+                "iPhone 3G": {
+                    "tcf_os":{
+                        "OS X": {},
+                        "other": {}
+                    }
+                }
+            }
+        }
+    }
+}

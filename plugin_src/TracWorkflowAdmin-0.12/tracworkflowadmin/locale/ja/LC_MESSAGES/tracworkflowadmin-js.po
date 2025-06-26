@@ -1,0 +1,101 @@
+# Japanese translations for TracWorkflowAdmin.
+# Copyright (C) 2011,2012 OpenGroove,Inc.
+# This file is distributed under the same license as the
+# TracWorkflowAdmin project.
+# OpenGroove <trac@opengroove.com>, 2011,2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: TracWorkflowAdmin 0.1.0\n"
+"Report-Msgid-Bugs-To: trac@opengroove.com\n"
+"POT-Creation-Date: 2020-02-03 23:12+0900\n"
+"PO-Revision-Date: 2012-04-15 21:10+0900\n"
+"Last-Translator: Jun Omae <omae@opengroove.com>\n"
+"Language: ja\n"
+"Language-Team: OpenGroove <trac@opengroove.com>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:268
+#: tracworkflowadmin/htdocs/scripts/main.js:328
+#: tracworkflowadmin/htdocs/scripts/main.js:330
+msgid "There was an error."
+msgstr "エラーが発生しました。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:298
+msgid ""
+"The status name overlaps. \n"
+"Please specify the name not overlapping."
+msgstr "ステータス名が重複しています。重複しない名前を指定してください。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:322
+msgid "Your changes has been saved."
+msgstr "変更を保存しました。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:335
+msgid ""
+"There was an internal error.\n"
+"result status code="
+msgstr ""
+"内部エラーが発生しました。\n"
+"result status code="
+
+#: tracworkflowadmin/htdocs/scripts/main.js:335
+msgid ""
+"\n"
+"\n"
+" Please check log file of server."
+msgstr ""
+"\n"
+"\n"
+"サーバーのログを確認してください。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:471
+#: tracworkflowadmin/htdocs/scripts/main.js:491
+#: tracworkflowadmin/htdocs/scripts/main.js:511
+msgid "No row selected. Please select row."
+msgstr "選択している行がありません。行を選択してください。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:514
+msgid "Are you sure you want to remove selected row?"
+msgstr "選択している行を削除しますか?"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:637
+msgid "Could not delete this status. One status at least is required."
+msgstr "ステータスを削除できません。最低1つのステータスが必要です。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:650
+msgid "This status is in use. Are you sure you want to remove forcibly it?"
+msgstr "このステータスは使われています。強制的に削除しますか?"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:651
+msgid "Are you sure you want to remove this status?"
+msgstr "このステータスを削除しますか?"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:714
+msgid "Too many statuses. Please remove unnecessary statuses."
+msgstr "ステータスが多すぎます。必要のないステータスを削除してください。"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:816
+msgid "Are you sure you want to cancel?"
+msgstr "取り消ししますか?"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:826
+msgid "Are you sure you want to restore initial workflow?"
+msgstr "初期状態に戻しますか?"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:836
+msgid ""
+"Your changes have not been saved and will be discarded if you continue. "
+"Are you sure that you want to switch to text mode?"
+msgstr "変更は保存されていません。このまま続けると変更は破棄されます。テキストモードに切り替えますか?"
+
+#: tracworkflowadmin/htdocs/scripts/main.js:849
+msgid ""
+"Your changes have not been saved and will be discarded if you continue. "
+"Are you sure that you want to switch to GUI mode?"
+msgstr "変更は保存されていません。このまま続けると変更は破棄されます。GUIモードに切り替えますか?"
+

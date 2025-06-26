@@ -1,0 +1,102 @@
+<!DOCTYPE html
+    PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:i18n="http://genshi.edgewall.org/i18n"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      i18n:domain="tracrpc">
+  <xi:include href="layout.html" />
+  <head>
+    <title i18n:msg="">Remote Procedure Call (RPC)</title>
+  </head>
+
+  <body>
+    <div id="content" class="wiki">
+      <div class="wikipage searchable">
+        <div id="wikipage" class="trac-content borderless">
+        <h1 class="section" i18n:msg="">Remote Procedure Call (RPC)</h1>
+        <p><strong>Installed API version:</strong> ${rpc.version}</p>
+        <h2 id="Protocols" class="section">Protocol reference:</h2>
+        <p>${
+          dgettext(
+            domain,
+            "Below you will find a detailed description of all the RPC "
+            "protocols installed in this environment. This includes supported "
+            "content types as well as target URLs for anonymous and "
+            "authenticated access. Use this information to interact with this "
+            "environment from a remote location.")
+        }</p>
+        <p>${
+          dgettext(
+            domain,
+            "Libraries for remote procedure calls and parsing exists for most "
+            "major languages and platforms - use a tested, standard library "
+            "for consistent results.")
+        }</p>
+        <dl py:for="name, description, paths in rpc.protocols">
+          <h3 id="${name}" class="section">${name}</h3>
+          <dd>
+            <p i18n:msg="name">For ${name} protocol, use any one of:</p>
+            <ul>
+              <li py:for="ct, ct_group in groupby(paths, lambda (_, x) : x)"
+                  py:with="header = tag.tt('Content-Type: ', ct);
+                           ct_group = list(ct_group)">
+                <i18n:msg params="header">${header} header with request to:</i18n:msg>
+                <ul>
+                  <li>
+                    For anonymous access:
+                    <ul>
+                      <li py:for="h, _ in ct_group">
+                        <a href="${req.abs_href(h)}">${req.abs_href(h)}</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    For authenticated access:
+                    <ul>
+                      <li py:for="h, _ in ct_group">
+                        <a href="${req.abs_href.login(h)}">${req.abs_href.login(h)}</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            <div>${wiki_to_html(context, description)}</div>
+          </dd>
+        </dl>
+
+        <h2 id="Methods" class="section">RPC exported functions</h2>
+
+        <div id="searchable">
+          <dl py:for="key in sorted(rpc.functions)" py:with="ns = rpc.functions[key]">
+            <h3 id="${'rpc.' + to_unicode(ns.namespace)}" class="section">
+              ${ns.namespace} - ${ns.description}
+            </h3>
+            <dd>
+              <table class="listing tickets">
+                <thead>
+                  <tr>
+                    <th style="width:40%">Function</th>
+                    <th style="width:45%">Description</th>
+                    <th style="width:15%">Permission required</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr py:for="idx, (signature, description, permission) in enumerate(ns.methods)"
+                      class="${'color3-' + ('even' if idx % 2 == 0 else 'odd')}">
+                    <td style="padding-left:4em;text-indent:-4em">${signature}</td>
+                    <td>${description}</td>
+                    <td>${permission or dgettext(domain, "By resource")}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+        </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

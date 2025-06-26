@@ -1,0 +1,301 @@
+#!/opt/stat/python3/bin/python3
+# Copyright 2024 Hewlett Packard Enterprise Development LP.
+
+import os
+import sys
+
+virtualenv_path = os.path.join('/opt/stat/python3/bin', 'activate_this.py')
+with open(virtualenv_path) as f:
+    code = compile(f.read(), virtualenv_path, 'exec')
+    exec(code, dict(__file__=virtualenv_path))
+
+import ssl
+import re
+import configparser
+import subprocess
+import argparse
+import json
+import xmlrpc.client
+from cmd import Cmd
+from datetime import datetime
+from pprint import pprint
+import shlex
+
+from tabulate import tabulate
+#sys.path.append("/opt/clmgr/power-service")
+#try:
+#    import hpe_clmgr_power_api as api
+#except ImportError:
+#    pwmgr = None
+
+
+config = configparser.ConfigParser()
+config_file_path = os.path.expanduser('~/.cartman/config')
+config.read(config_file_path)
+
+
+
+EDITOR = os.environ.get('EDITOR', 'vim')  
+parts = config['trac']['base_url'].split('://', 1)
+scheme = parts[0] + '://'
+rest = parts[1]
+
+
+trac_url = f"{scheme}{config['trac']['username']}:{config['trac']['password']}@{rest}/login/xmlrpc"
+
+
+if config.has_option('trac', 'verify_ssl_cert'):
+    verify_ssl_cert = config.get('trac', 'verify_ssl_cert')
+    if verify_ssl_cert.lower() == 'false':
+        context = ssl._create_unverified_context()
+        trac_server = xmlrpc.client.ServerProxy(trac_url, context=context)
+    else:
+        trac_server = xmlrpc.client.ServerProxy(trac_url)
+else:
+    trac_server = xmlrpc.client.ServerProxy(trac_url)
+        
+
+
+class MyPrompt(Cmd):
+    prompt = 'trac> '
+    intro = "Welcome! Type ? to list commands"
+    allow_abbrev = True
+
+    def do_exit(self, inp):
+        print("Bye")
+        return True
+ 
+    def do_method(self, inp):
+        try:
+            for method in trac_server.system.listMethods(): 
+                print(method) 
+                print('\n'.join(['  ' + x for x in trac_server.system.methodHelp(method).split('\n')]))
+        except:
+            print("something broke")
+
+    def do_tquery(self,inp):
+        """ tq [parameters]
+Ticket Query
+Without any parameters return all open tickets         
+Can filter on any parameters e.g to find closed tickets for host x1000c0s0b0n0:
+    tq hostname=x1000c0s0bn0&status=closed
+Note: parameters can be inverted with ! i.e show all not closed tickets:
+    tq status=!closed 
+""" 
+        if not inp:
+            inp="status=!closed"
+        content=[["ID","Last Update","Xname","Summary","Status","Type","Component","Owner"]]
+        try:
+            for ticket_id in trac_server.ticket.query(inp):
+                ticket=trac_server.ticket.get(ticket_id)
+                ts=int(ticket[3]['_ts'])
+                datetime_object = datetime.fromtimestamp(ts/ 999998)
+                dt=datetime_object.strftime('%Y-%m-%d %H:%M:%S')
+                content.append([str(ticket[0]),dt,ticket[3]['xname'],ticket[3]['summary'],ticket[3]['status'],ticket[3]['type'],ticket[3]['component'],ticket[3]['owner']])
+        except Exception as e: 
+            print("something went wrong", e)
+        print(tabulate(content, headers='firstrow', tablefmt='pipe'))
+
+    def do_tget(self,inp):
+        """ tget <TICKET_ID>
+Ticket Get
+Gets parameters, description and updates for ticket with TICKET_ID
+Example get ticket 6:
+    tget 6
+"""
+        content=[["ID","Last Update","Summary","Status"]] 
+        try:
+            ticket=trac_server.ticket.get(inp)
+            ts=int(ticket[3]['_ts'])
+
+            datetime_object = datetime.fromtimestamp(ts/ 999998)
+            dt=datetime_object.strftime('%Y-%m-%d %H:%M:%S')
+            
+            latest_change_dt = ticket[2]
+            latest_change_time = datetime.strptime(str(latest_change_dt), '%Y%m%dT%H:%M:%S')
+
+            content.append([str(ticket[0]),latest_change_time,ticket[3]['summary'],ticket[3]['status']])
+            print(tabulate(content, headers='firstrow', tablefmt='pipe')) 
+            
+            content=[['Description']]
+            content.append([ticket[3]['description']])
+            print(tabulate(content, headers='firstrow', tablefmt='pipe')) 
+            
+            content=[["Time","Author","Field","Old Vaule","New Value"]]
+            changes=trac_server.ticket.changeLog(inp)
+            for change in changes:
+                latest_change_dt = change[0] 
+                latest_change_time = datetime.strptime(str(latest_change_dt), '%Y%m%dT%H:%M:%S') 
+                content.append([latest_change_time,change[1],change[2],change[3],change[4]])
+            print(tabulate(content, headers='firstrow', tablefmt='pipe'))     
+        except Exception as e:
+            print("something went wrong",e)
+
+    def do_pprint(self,inp):
+        """ pprint <TICKET_ID>
+pipe print the raw ticket dataframe
+"""
+        try:
+            ticket=trac_server.ticket.get(inp)
+            pprint(ticket) 
+        except Exception as e:
+            print("something went wrong")
+    
+    def do_tactions(self,inp):
+        """ tactions <TICKET_ID>
+show available action for a ticket - not really much use on the command line
+"""
+        try:
+            actions=trac_server.ticket.getActions(inp)
+            pprint(actions)
+        except Exception as e:
+            print("something went wrong",e)
+    
+    def do_tupdate(self,inp):
+        """tupdate <ID> <UPDATE>
+Ticket Update
+Updates existing ticket <ID> with string <UPDATE>
+Example:
+    tup 6 This is an update to ticket 6 
+"""
+        args=inp.split()
+        comment=" ".join(args[1:])
+        try:
+            trac_server.ticket.update(args[0],comment)
+        except Exception as e:
+            print("something went wrong",e)
+    
+    do_EOF = do_exit
+
+    #help_EOF = help_exit
+
+    def do_tcreate(self,inp):
+        """ tcreate <options>
+    use tcreate -h to see all options
+    """
+        try:
+            parser = argparse.ArgumentParser(prog='tcreate', description='Create a new ticket')
+            parser.add_argument("-t","--type", choices=['defect','enhancment','task'], default="defect")
+            parser.add_argument("-c","--component", default="Hardware-EX")
+            parser.add_argument("-p", "--priority",choices=['minor','trivial','major','critical','blocker'],default="minor", help="trivial, minor, major, critical or blocker")
+            parser.add_argument("-s", "--summary",type=str, required=True)
+            parser.add_argument("-d","--description",type=str, required=True)
+            parser.add_argument("-n","--node",required=False)
+            parser.add_argument("-x","--xname",required=True)
+            try:
+                inargs = shlex.split(inp)
+                # inargs = re.findall(r'(?:"[^"]*"|[^\s"])+', inp)
+                #inargs = [arg.strip('"') for arg in inargs]
+                # print(inargs)
+                args = parser.parse_args(inargs)
+            except argparse.ArgumentError as e:
+                print(f"Error: {e}")
+            except SystemExit:
+                # Catch SystemExit exception and return False
+                return False
+
+
+            pprint(args)
+            try:
+                return_val=trac_server.ticket.create(args.summary,args.description,{'component':args.component,'node':args.node,'priority':args.priority,'type':args.type, 'xname':args.xname})
+                self.do_tget(return_val)
+            except Exception as e:
+                print("something went wrong",e)
+
+        except argparse.ArgumentError as e:
+            if str(e) == "Displaying help":
+                parser.print_help()
+            else:
+                print(f"Error: {e}")
+
+    def do_tdelete(self,inp):
+        """ tdelete <TICKET_ID>
+Delete ticket with ID <TICKET_ID> - will confirm before deletion
+"""
+        self.do_tget(inp)
+        answer = input("Delete this ticket? (Y/N): ")
+        if answer.lower() == "y":
+            try:
+                trac_server.ticket.delete(inp)
+            except Exception as e:
+                print("something went wrong",e)
+
+    def do_tassign(self,inp):
+        """ tassign <TICKET_ID> <NEW_OWNER>
+(Re)assign a ticket <TICKET_ID> to user <NEW_OWNER>
+"""
+        args=inp.split()
+        try:
+            trac_server.ticket.update(args[0],"Changing owner",{'owner':args[1]})
+        except Exception as e:
+            print("something went wrong",e)
+
+    def do_alerta(self,inp):
+        alerta_dict=json.loads(self.alerta_get())
+        if inp:
+            content=[["Severity","Event","Description"]]
+        else:
+            content=[["Node","Severity","Event","Description"]]
+        for alert in alerta_dict:
+            if inp:
+                if alert['environment'] == "b'"+inp+"'":
+                    content.append([alert['severity'],alert['event'],alert['text']])
+            else:
+               content.append([alert['environment'],alert['severity'],alert['event'],alert['text']]) 
+        print(tabulate(content, headers='firstrow', tablefmt='pipe')) 
+    
+    def alerta_get(filter):
+        alerta_cmd='/opt/clmgr/alerta/bin/alerta --config-file /opt/clmgr/alerta/alerta-client.conf --json query'
+        alerta_json=subprocess.run(alerta_cmd,shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE )
+        return alerta_json.stdout 
+ 
+    def do_slurm(self,imp):
+        
+        slurm_dict=json.loads(self.slurm_status())
+        content=[['State','State Flags','Reason','Date','User']]
+        node_details=slurm_dict['nodes']
+        if imp:
+            result = [d for d in node_details if d['name'] == imp]
+            if result:
+                dt=datetime.fromtimestamp(result[0]['reason_changed_at'])
+                content.append([result[0]['state'],str(result[0]['state_flags']),result[0]['reason'],str(dt),result[0]['reason_set_by_user']])
+        else:
+            print("not implimented")
+
+        print(tabulate(content, headers='firstrow', tablefmt='pipe'))  
+
+    def slurm_status(something):
+        try:
+            slurm_status=subprocess.run("sinfo -o \"%20E %10n %10t\" --json",shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE )
+            return slurm_status.stdout
+        except:
+            return "slurm status failed. is it running?"
+    
+    def do_status(self,imp):
+        if imp:
+            self.get_status(imp)
+
+    def get_status(self,imp):
+        print("==Tickets==")
+        self.do_tquery("node="+imp)
+        print("==Slurm==")
+        self.do_slurm(imp)
+        print ("==Alerta==")
+        self.do_alerta(imp)
+
+
+
+if __name__ == '__main__':
+    #nodes=api.InventoryNodes()
+    #node_status=api.NodePowerStatus(nodes[0])
+    if len(sys.argv) > 1:
+        # Create an instance of the MyCmd class
+        mycmd = MyPrompt()
+
+        # Pass the command-line arguments to the onecmd method
+        #for arg in sys.argv[1:]:
+        #    mycmd.onecmd(arg)
+        mycmd.onecmd(' '.join(sys.argv[1:]))
+    else:
+        # Start an interactive session if no arguments are provided
+        MyPrompt().cmdloop()

@@ -1,0 +1,17 @@
+[tox]
+envlist =
+    py27-trac{012,10,12,14}
+    py3{5,6,7,8,9,10,11,12}-trac16
+
+[testenv]
+deps =
+    Babel<2.10
+    trac012: Trac~=0.12.0
+    trac10: Trac~=1.0.0
+    trac12: Trac~=1.2.0
+    trac14: Trac~=1.4.0
+    trac16: Trac~=1.6.0
+setenv =
+    TMP = {envtmpdir}
+commands =
+    {envpython} -Wdefault -m unittest tracrpc.tests.test_suite

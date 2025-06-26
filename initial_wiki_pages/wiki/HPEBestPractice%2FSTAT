@@ -1,0 +1,23 @@
+### Goal 
+STAT is installed on the admin node and is intended to help system bringup and triage, by providing a central repository for system documentation, and an easy to use, easy to search interface for logging and tracking system issues and configuration tasks. 
+
+
+While still in its infancy, STAT has executive sponsorship with the goal being fully productized to provide full system life-cycle component failure and repair history that can be fed back into the business, potentially integrate with Salesforce and streamline HPC system issue management. 
+
+
+STAT has an easy to use web-interface and a couple of command line clients. 
+i.e. you can log an issue as easily as:
+```
+tt tcreate -s \\"DIMM1A non-correctable error\\" -d \\"more detail here \\" -x x1001c0s0b0n0 -n nid1 -c Hardware-EX
+```
+and find all issues in a specific chassis with 
+```
+tt tquery xname~=x1001c0
+```
+
+There is also an editor based client `scon` 
+see [wiki:STAT/Cartman]
+
+Web access can be achieved via ssh port forwarding or proxying. 
+Please reach out on slack if you need any help with this.
+

@@ -1,0 +1,159 @@
+## Overview
+
+Using a local git repository and inotify, transparent version control can be implimented for aspects of HPCM configuration that the are currerntly untracked, with changing existing image managment workflows.
+
+**NOTE: This process and accociated software is not part of HPCM, or shipped as part of HPCM. Not support is implied of given.**
+It is currently undergoing evaluation and is only used oduring deployment by HPE employees.
+
+
+## Setup
+**NOTE: to limit amount of inotify watches needed have split into different repos for each dir.**
+
+```bash
+cm node zypper -n admin --repo-group sles15sp5_x86 install inotify-tools
+useradd git -U -m -d /opt/clmgr/image/git
+su - git
+mkdir .ssh
+chmod 700 .ssh
+touch .ssh/authorized_keys
+chmod 600 .ssh/authorized_keys
+git config --global init.defaultBranch main
+for f in overrides post-install config
+do
+	mkdir ${f}.git
+	cd ${f}.git
+	git init --bare
+	cd ..
+done
+exit
+cd
+cat ~/.ssh/id_rsa.pub >> ~git/.ssh/authorized_keys 
+
+cd /opt/clmgr/image/overrides/
+git init -b main
+git remote add origin git@admin:/opt/clmgr/image/git/overrides.git
+git add .
+git commit -a -m "init"
+git push --set-upstream origin main
+
+cd /opt/clmgr/image/scripts/post-install/
+git init -b main
+git remote add origin git@admin:/opt/clmgr/image/git/post-install.git
+git add .
+git commit -a -m "init"
+git push --set-upstream origin main
+
+# this is where we'll dump disco, rpmlists, repo-group info etc.
+
+mkdir /opt/clmgr/image/config
+cd /opt/clmgr/image/config/
+git init -b main
+git remote add origin git@admin:/opt/clmgr/image/git/config.git
+touch dump_config.sh
+git add .
+git commit -a -m "init"
+git push --set-upstream origin main
+```
+
+Secure git user, just in case. 
+```bash
+chsh -s $(command -v git-shell) git
+```
+
+### Additional repos from remote servers 
+Example targets for config version control may be WLM config on remote servers e.g. for pbs server
+* add empty repo under git.. as we've stop interactive logins... we'll do as root
+```bash
+cd /opt/clmgr/image/git/
+mkdir wlm.git
+cd wlm.git
+git init -b main --bare
+cd ../
+chown -R git:git wlm.git
+```
+https://stackoverflow.com/questions/63132448/how-to-restrict-git-ssh-access-based-on-ssh-key-given
+**--- NOT WORKING when trying to limit access to repos from remote server with above ...needs more tweaking**
+
+## Auto update with inotify
+https://gitlab.com/philippedn/git-watch/-/blob/master/git-watch?ref_type=heads
+
+See `/opt/stat/tools/git-watch/
+
+### Command line magic
+```bash
+sadmin111:/opt/clmgr/image/scripts/post-install # ls -lrt
+total 32
+-rw-r--r-- 1 root root  979 Mar 12 11:30 60all.create_odapw_link
+-rw-r--r-- 1 root root 1526 Mar 12 11:30 50all.create_hsn_udev
+-rw-r--r-- 1 root root 3153 Mar 12 11:30 50all.create_filesystem_for_reserved_partition
+-rw-r--r-- 1 root root 1055 Mar 12 11:30 00all.run_cluster_configuration
+-rw-r--r-- 1 root root 2287 Mar 12 11:32 README
+-rw-r--r-- 1 root root  150 Mar 12 11:32 99all.harmless_example_script
+-rw-r--r-- 1 root root  150 Aug  8 17:01 22wibble.hat
+drwxr-xr-x 4 root root   29 Aug  8 20:43 test
+lrwxrwxrwx 1 root root    7 Aug  8 20:48 99node.test -> test.sh
+-rw-r--r-- 1 root root   71 Aug  8 22:17 test.sh
+drwxr-xr-x 8 root root  184 Aug  8 22:18 .git
+```
+
+```bash
+sadmin111:/opt/clmgr/image/scripts/post-install # git log -p -3 -- test.sh
+commit 098d6efd9638e1fd2acc37465ce5ec81a7ac34cf (HEAD -> main, origin/main)
+Author: root <root@sadmin111.cm.home.theback.org>
+Date:   Thu Aug 8 22:18:16 2024 +0000
+
+    Commit on sadmin111, trigger=inotify
+
+diff --git a/test.sh b/test.sh
+index 2687769..99aa098 100644
+--- a/test.sh
++++ b/test.sh
+@@ -1,4 +1,3 @@
+ #!/bin/bash
+-echo > /root/log 2>&1
+ rsync -avh $(dirname $0)/test/* /
+ echo running > /root/run
+
+commit d7481a92faf41f8123ad2afe942a9a875b3ba780
+Author: root <root@sadmin111.cm.home.theback.org>
+Date:   Thu Aug 8 21:44:18 2024 +0000
+
+    Commit on sadmin111, trigger=inotify
+
+diff --git a/test.sh b/test.sh
+index 2aa1e04..2687769 100644
+--- a/test.sh
++++ b/test.sh
+@@ -1,4 +1,4 @@
+ #!/bin/bash
+ echo > /root/log 2>&1
+-rsync -avh $(dirname $0/test/* /
++rsync -avh $(dirname $0)/test/* /
+ echo running > /root/run
+
+commit cc37526e982d557afa7e51f23b949f450832d4ec
+Author: root <root@sadmin111.cm.home.theback.org>
+Date:   Thu Aug 8 21:42:16 2024 +0000
+
+    Commit on sadmin111, trigger=inotify
+
+diff --git a/test.sh b/test.sh
+index aa624db..2aa1e04 100644
+--- a/test.sh
++++ b/test.sh
+@@ -1,6 +1,4 @@
+ #!/bin/bash
+-set +x 
+ echo > /root/log 2>&1
+-rsync -avh test/* /
++rsync -avh $(dirname $0/test/* /
+ echo running > /root/run
+-exit 1
+```
+
+# STAT integration
+### Configuration
+* log into local STAT 
+* enable git repos `Admin -> Plugins -> Trac 1.X -> select `GitConnector` -> Apply Changes`
+* add repos by clicking on 'Admin -> Version Control- Repositories'
+

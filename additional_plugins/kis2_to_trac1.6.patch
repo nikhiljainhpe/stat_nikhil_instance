@@ -1,0 +1,29 @@
+diff --color=auto -ruN kis2/__init__.py kis2-trac1.6/__init__.py
+--- kis2/__init__.py	2024-08-07 11:23:03
++++ kis2-trac1.6/__init__.py	2024-08-07 11:28:31
+@@ -1 +1 @@
+-from kis import IConfigFunction
++from .kis import IConfigFunction
+diff --color=auto -ruN kis2/kis.py kis2-trac1.6/kis.py
+--- kis2/kis.py	2024-08-07 11:23:03
++++ kis2-trac1.6/kis.py	2024-08-07 11:28:31
+@@ -24,7 +24,7 @@
+                          RequestDone
+ from trac.web.chrome import add_script, add_script_data, ITemplateProvider
+ 
+-from genshi.filters.transform import Transformer
++# from genshi.filters.transform import Transformer
+ 
+ ###############################################################################
+ 
+@@ -763,7 +763,9 @@
+ 
+     # ITemplateProvider methods
+     def get_htdocs_dirs(self):
+-        return [('kis2', resource_filename(__name__, 'htdocs'))]
++    #    return [('kis2', resource_filename(__name__, 'htdocs'))]
++        yield 'kis2', resource_filename(__name__, 'htdocs')
++
+ 
+     def get_templates_dirs(self):
+         return []

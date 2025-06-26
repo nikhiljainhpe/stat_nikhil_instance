@@ -1,0 +1,102 @@
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 900;
+    font-style: italic;
+    src: url('fonts/MetricWeb-BlackItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 900;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Black.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 700;
+    font-style: italic;
+    src: url('fonts/MetricWeb-BoldItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 700;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Bold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 600;
+    font-style: italic;
+    src: url('fonts/MetricWeb-SemiboldItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 600;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Semibold.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 500;
+    font-style: italic;
+    src: url('fonts/MetricWeb-MediumItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 500;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 400;
+    font-style: italic;
+    src: url('fonts/MetricWeb-RegularItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 400;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 300;
+    font-style: italic;
+    src: url('fonts/MetricWeb-LightItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 300;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Light.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 100;
+    font-style: italic;
+    src: url('fonts/MetricWeb-ThinItalic.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'MetricWeb';
+    font-weight: 100;
+    font-style: normal;
+    src: url('fonts/MetricWeb-Thin.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'SimRg';
+    src: url('fonts/SimRg.otf') format('opentype');
+}

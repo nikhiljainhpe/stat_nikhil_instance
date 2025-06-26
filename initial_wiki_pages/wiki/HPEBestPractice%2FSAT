@@ -1,0 +1,50 @@
+## SAT directories
+* Depending on where the test needs to be run from there should be SAT directory on both: 
+    * the admin node under `/root/hpe/SAT/` and
+    * on a shared file system under `<MOUNTPOINT>/hpe/SAT/`
+
+
+* Example directory layout
+```
+SAT
+├── HPCM
+│   └── h-01
+│       ├── logs
+│       ├── readme.md
+│       ├── run.sh
+│       └── runscreen.sh
+├── IOBechmarks
+├── PerfBenchmarks
+├── Security
+└── Storage
+```
+
+* Example `readme.md`
+```
+# test-id : brief-description
+
+## Requirement
+Full description from test plan
+Est. Runtime:
+
+## Acceptance Criteria
+
+## Method
+Logical overview of test process
+
+## Prerequisites
+
+## Run
+</path/to/run_script>
+
+## Results
+</path/to/results>
+
+How to interpret results
+```
+
+* Example `runscreen.sh`
+```bash
+date=$(date +%Y%m%d-%H%M)
+screen -S test-<TEST_ID> -L -Logfile logs/<TEST_ID>-${date} bash -c './run.sh'
+```

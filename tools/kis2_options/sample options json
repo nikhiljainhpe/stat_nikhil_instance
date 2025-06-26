@@ -1,0 +1,124 @@
+{
+    "component": {
+        "Hardware-Cooling": {
+            "sub_component":{
+                "Hardware-Cooling-option1": {},
+                "Hardware-Cooling-option2": {},
+                "Hardware-Cooling-option3": {},
+                "Hardware-Cooling-option4": {}
+                
+            }
+        },
+        "Hardware-DL": {
+            "sub_component":{
+                "Hardware-DL-option1": {},
+                "Hardware-DL-option2": {},
+                "Hardware-DL-option3": {},
+                "Hardware-DL-option4": {}
+                
+            }
+        },
+        "Hardware-EX": {
+            "sub_component":{
+               "Hardware-EX-option1": {},
+                "Hardware-EX-option2": {},
+                "Hardware-EX-option3": {},
+                "Hardware-EX-option4": {}
+                
+            }
+        },
+         "Hardware-Ethernet": {
+            "sub_component":{
+                "Hardware-Ethernet-option1": {},
+                "Hardware-Ethernet-option2": {},
+                "Hardware-Ethernet-option3": {},
+                "Hardware-Ethernet-option4": {}
+                
+            }
+        },
+         "Hardware-Other": {
+            "sub_component":{
+                "Hardware-Other-option1": {},
+                "Hardware-Other-option2": {},
+                "Hardware-Other-option3": {},
+                "Hardware-Other-option4": {}
+                
+            }
+        },
+         "Hardware-Slingshot": {
+            "sub_component":{
+                "Hardware-Slingshot-option1": {},
+                "Hardware-Slingshot-option2": {},
+                "Hardware-Slingshot-option3": {},
+                "Hardware-Slingshot-option4": {}
+                
+            }
+        },
+         "Software-Dev": {
+            "sub_component":{
+                "Software-Dev-option1": {},
+                "Software-Dev-option2": {},
+                "Software-Dev-option3": {},
+                "Software-Dev-option4": {}
+                
+            }
+        },
+         "Software-HPCM": {
+            "sub_component":{
+                "Software-HPCM-option1": {},
+                "Software-HPCM-option2": {},
+                "Software-HPCM-option3": {},
+                "Software-HPCM-option4": {}
+                
+            }
+        },
+         "Software-OS": {
+            "sub_component":{
+                "Software-OS-option1": {},
+                "Software-OS-option2": {},
+                "Software-OS-option3": {},
+                "Software-OS-option4": {}
+                
+            }
+        },
+         "Software-Other": {
+            "sub_component":{
+                "Software-Other-option1": {},
+                "Software-Other-option2": {},
+                "Software-Other-option3": {},
+                "Software-Other-option4": {}
+                
+            }
+        },
+         "Software-Scheduler": {
+            "sub_component":{
+                "Software-Scheduler-option1": {},
+                "Software-Scheduler-option2": {},
+                "Software-Scheduler-option3": {},
+                "Software-Scheduler-option4": {}
+                
+            }
+        },
+         "Software-Slingshot": {
+            "sub_component":{
+                "Software-Slingshot-option1": {},
+                "Software-Slingshot-option2": {},
+                "Software-Slingshot-option3": {},
+                "Software-Slingshot-option4": {}
+                
+            }
+        }
+    }
+}
+
+
+other options of component are:
+Hardware-Ethernet,
+Hardware-Other,
+Hardware-Slingshot,
+Software-Dev,
+Software-HPCM,
+Software-OS,
+Software-Other,
+Software-Scheduler,
+Software-Slingshot

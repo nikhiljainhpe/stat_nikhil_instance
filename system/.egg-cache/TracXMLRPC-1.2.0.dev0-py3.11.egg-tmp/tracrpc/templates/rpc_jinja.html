@@ -1,0 +1,107 @@
+# extends 'layout.html'
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      # block title
+      Remote Procedure Call (RPC)
+      ${ super() }
+      # endblock title
+    </title>
+    # block head
+    ${ super() }
+    # endblock
+  </head>
+  <body>
+    # block content
+    <div id="content" class="wiki">
+      <div class="wikipage searchable">
+        <div id="wikipage" class="trac-content borderless">
+          <h1 class="section">Remote Procedure Call (RPC)</h1>
+          <p><strong>Installed API version :</strong> ${rpc.version} </p>
+          <h2 id="Protocols" class="section">Protocol reference:</h2>
+          <p>Below you will find a detailed description of all the RPC
+            protocols installed in this environment. This includes
+            supported content types as well as target URLs for
+            anonymous and authenticated access. Use this
+            information to interact with this environment from
+            a remote location.
+          </p>
+          <p>Libraries for remote procedure calls and parsing exists
+            for most major languages and platforms - use a tested, standard library
+            for consistent results.</p>
+
+          # for protocol in rpc.protocols:
+          <dl>
+            <h3 id="${protocol[0]}" class="section">${protocol[0]}</h3>
+            <dd>
+              <p>For ${protocol[0]} protocol, use any one of:</p>
+              <ul>
+                # for ct, _ct_group in protocol[2]|groupby(1):
+                <li>
+                  <tt>Content-Type: ${ct}</tt> header with request to:
+                  # with
+                  #    set ct_group = _ct_group|list
+                  <ul>
+                    # for h, _ in ct_group:
+                    <li>
+                      <a href="${req.abs_href(h)}">${req.abs_href(h)}</a>
+                      for anonymous access
+                    </li>
+                    # endfor
+                    # for h, _ in ct_group:
+                    <li>
+                      <a href="${req.abs_href.login(h)}">${req.abs_href.login(h)}</a>
+                      for authenticated access
+                    </li>
+                    # endfor
+                  </ul>
+                  # endwith
+                </li>
+                # endfor
+              </ul>
+              <div>${wiki_to_html(context, protocol[1])}</div>
+            </dd>
+          </dl>
+          # endfor
+          <h2 id="Methods" class="section">RPC exported functions</h2>
+
+          <div id="searchable">
+            ## for="key in sorted(rpc.functions)
+            # for key in rpc.functions|sort:
+            <dl>
+              # set namespace = rpc.functions[key]
+              <h3 id="${'rpc.' + to_unicode(namespace.namespace)}" class="section">
+                ${namespace.namespace} - ${namespace.description}
+              </h3>
+              <dd>
+                <table class="listing tickets">
+                  <thead>
+                    <tr>
+                      <th style="width:40%">Function</th>
+                      <th style="width:45%">Description</th>
+                      <th style="width:15%">Permission required</th>
+                    </tr>
+                  </thead>
+                  # for function in namespace.methods:
+                  <tbody>
+                    <tr class="${'color3-' + (loop.index0 % 2 == 0 and 'even' or 'odd')}">
+                      <td style="padding-left:4em;text-indent:-4em">${function[0]}</td>
+                      <td>${function[1]}</td>
+                      <td>${function[2] or "By resource"}</td>
+                    </tr>
+                  </tbody>
+                  # endfor
+                </table>
+              </dd>
+            </dl>
+            # endfor
+          </div>
+
+        </div>
+      </div>
+    </div>
+    ${ super() }
+    # endblock content
+  </body>
+</html>

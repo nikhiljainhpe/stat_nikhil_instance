@@ -1,0 +1,11 @@
+[Unit]
+Description=git-watch
+After=network.target
+
+[Service]
+Type=simple
+Environment="TRIGGER=inotify"
+ExecStart=/opt/stat/git-watch/git-watch -t inotify /opt/clmgr/image/config /opt/clmgr/image/overrides /opt/clmgr/image/scripts/post-install
+
+[Install]
+WantedBy=multi-user.target

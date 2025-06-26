@@ -1,0 +1,78 @@
+= Markdown !WikiProcessor Macro Implementation =
+
+== Description ==
+
+The !MarkdownMacro package implements John Gruber's [http://daringfireball.net/projects/markdown/ Markdown]
+lightweight plain text-to-HTML formatting syntax as a [WikiProcessors WikiProcessor] macro. The original
+code is courtesy of Alex Mizrahi aka [#SeeAlso killer_storm]. I simply added a little robustness to the error 
+checking, documented the package, created setup.py and this README, and registered it with
+[MarkdownMacro Trac Hacks].
+
+== Bugs/Feature Requests == 
+
+Existing bugs and feature requests for MarkdownMacro are 
+[query:status!=closed&component=MarkdownMacro&order=priority here].
+
+If you have any issues, create a 
+[/newticket?component=MarkdownMacro&owner=dwclifton new ticket].
+
+== Download ==
+
+Download the zipped source from [download:markdownmacro here].
+
+== Source ==
+
+You can check out WikiSearchMacro from [http://trac-hacks.org/svn/markdownmacro here] using Subversion, or [source:markdownmacro browse the source] with Trac.
+
+== Installation ==
+
+First you need to install [http://freewisdom.org/projects/python-markdown/ Python Markdown].
+Follow the instructions on the Web site.
+
+Proceed to install the plugin as described in t:TracPlugins.
+
+Enable the macro in `trac.ini`:
+
+{{{#!ini
+[components]
+Markdown.* = enabled
+}}}
+
+You may have to restart your Web server.
+
+== Example ==
+
+{{{
+{{{#!Markdown
+
+# RGB
+
++ Red
++ Green
++ Blue
+
+## Source Code
+
+    from trac.core import *
+    from trac.wiki.macros import WikiMacroBase
+    from trac.wiki.formatter import Formatter
+
+An example [link](http://example.com/ "With a Title").
+}}}
+}}}
+
+== See Also ==
+
+ * John Gruber's [http://daringfireball.net/projects/markdown/ Markdown]
+ * [http://www.freewisdom.org/projects/python-markdown/ Python Markdown]
+ * [http://daringfireball.net/projects/markdown/syntax Markdown syntax]
+
+== Author/Contributors ==
+
+ * '''Author:''' [wiki:dwclifton] (Macro/Processor package, setup, documentation)
+ * '''Maintainer:''' [wiki:dwclifton]
+ * '''Contributors:'''
+  * [http://daringfireball.net/colophon/ John Gruber]
+  * [http://www.freewisdom.org/projects/python-markdown/Credits Yuri Takhteyev, et al.]
+  * Alex Mizrahi alias [http://trac-hacks.org/attachment/ticket/353/Markdown.py killer_storm]
+  * The Trac and Python development community

@@ -1,0 +1,32 @@
+LoadModule wsgi_module /opt/stat/python3/lib64/python3.11/site-packages/mod_wsgi/server/mod_wsgi-py311.cpython-311-x86_64-linux-gnu.so
+
+Redirect 301 /trac /stat
+
+WSGIDaemonProcess stat user=stat group=stat python-home=/opt/stat/python3 home=/opt/stat
+WSGIProcessGroup stat
+WSGIApplicationGroup %{GLOBAL}
+WSGIScriptAlias /stat /opt/stat/apache2/cgi-bin/stat.wsgi
+
+# apache cacheing removed temporarily to get plugins working.
+# Alias /stat/chrome/ /opt/trac/apache2/htdocs/
+
+# this fixes a 'bug' when installed in HPCM where logins don't work over https
+ErrorDocument 401 default
+
+<Directory /opt/stat/apache2/cgi-bin>
+    Order allow,deny 
+    Allow from all 
+</Directory>
+
+<Directory /opt/stat/apache2/>
+    WSGIApplicationGroup %{GLOBAL}
+    Order allow,deny 
+    Allow from all 
+</Directory>
+
+<Location "/stat/login">
+  AuthType Basic
+  AuthName "Stat"
+  AuthUserFile /opt/stat/.htpasswd
+  Require valid-user
+</Location>

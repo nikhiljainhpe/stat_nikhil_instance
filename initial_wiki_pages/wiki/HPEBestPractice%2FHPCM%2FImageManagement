@@ -1,0 +1,26 @@
+### Goals
+The intention is to keep image management overhead as low, and image size to a minimum
+* Where possible, use one image for everything, tuning enabled services with a post-install script(s) where needed. e.g. logins, compute, lnet servers all have the same base image. However CPE and lustre mounting would be disabled on lnet servers. 
+* All global configuration should go into hybrid post-install scripts, so images can easily be identical if rebuilt from an rpm list. 
+* Any large shared filesystem requirements (e.g. CUDA, RoCM) should be installed on shared storage, not in the image. 
+
+### Base and working images 
+All development work is done on a base image. 
+This image can be updated, and assigned to nodes for testing, but when feature complete, it should be checked in to image revision control, and copied to a working image for wide spread deployment. e.g.
+
+```
+marvin9:~ # cm image revision commit -i kaust-cos-2.5.130-cpe -m "Added sssd -230929 LM"
+
+Image kaust-cos-2.5.130-cpe using repo group: kaust-cos-2.5.130-cpe
+  If you wish to unset this, use cm image unset with --repo-group
+Repo group kaust-cos-2.5.130-cpe specified, using repos: SLE-15-SP4-Full-x86_64 Cluster-Manager-1.9-sles15sp4-x86_64 SLES15-SP4-Updates-x86_64-20230106 Cluster-Manager-1.9-sles15sp4-patches-x86_64 COS-2.5.130-sles15sp4-x86_64 slingshot-host-software-2.1.0-30-cos-2.5 cpe-23.09-sles15-sp4
+
+marvin9: cinstallman: vcs: Using rsync to commit image kaust-cos-2.5.130-cpe...
+cmd: rsync --numeric-ids -aqHAXx --link-dest=/opt/clmgr/image/vcs/kaust-cos-2.5.130-cpe/3 /opt/clmgr/image/images/kaust-cos-2.5.130-cpe/ /opt/clmgr/image/vcs/kaust-cos-2.5.130-cpe/4/
+marvin9: cinstallman: image kaust-cos-2.5.130-cpe committed to vcs, rev: 4
+```
+Create the working image with
+```
+marvin9:~ # cm image copy -i kaust-cos-2.5.130-cpe_v4 -o kaust-cos-2.5.130-cpe
+```
+

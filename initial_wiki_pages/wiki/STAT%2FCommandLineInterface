@@ -1,0 +1,101 @@
+## Authentication
+
+Both cartman (scon) and tt use the same authentication system:
+
+create `~/.cartman/config`
+```
+[trac]
+base_url = https://127.0.0.1/stat
+username = <USER>
+password = <PASS>
+verify_ssl_cert = False
+```
+replacing `<USER>` and`<PASS>` with your STAT username and password.
+
+<br>
+`trac-admin` (and tools that use it like docs.sh) access the trac db directly. 
+
+## Tools
+
+### cartman
+Cartman uses a text editor for logging and updating tickets at the command line. 
+
+see: [wiki:Cartman] for full details.
+
+
+Run: `scon new`
+
+Fill in ticket details, full description at bottom
+
+**NOTES: Subject, Component and Xname fields must not be empty.**
+
+### trac-admin
+
+`/opt/stat/python3/bin/trac-admin` can be used for managing trac: [[wiki:TracAdmin]]
+
+
+**NOTE: the following are not part of the upstream trac distribution and may contain bug, be incomplete, inconsistant in their usage etc.**
+
+### docs.sh
+
+`/opt/stat/bin/docs.sh` can be used for importing and exporting invidual wiki pages. 
+
+The `-i <FORMAT>` option will format the document in monospace and attempt to syntax highlight.
+For example to import: 
+```
+./docs.sh -i slurm.conf -t ini -p Config/slurm/slurm.conf
+```
+This example imports the contents for specified dirs for and documentation change tracking
+{{{
+cd /opt/clmgr/image/overrides/; 
+find . -type f -exec /opt/trac/bin/docs.sh -i ./{} -p Config/files/Overrides/{} \;
+
+cd /opt/clmgr/image/scripts/post-install/
+find . -type f -exec /opt/trac/bin/docs.sh -i ./{} -p Config/files/Post-install/{} \;
+}}}
+
+### dumpwiki
+`/opt/stat/bin/dumpwiki.sh <PATH>` will dump all wiki pages to `<PATH>` for archiving or import to other systems (works well with git) 
+
+### tt
+`/opt/stat/bin/tt` (Trac Ticket) can create,update and delete tickets. be used either directly on the command line, or interactivly:
+
+**NOTE: This script uses the same credentials file `~/.cartman/config as cartman(scon) **
+{{{
+sadmin19:/opt/stat/bin # /opt/stat/bin/tt 
+Welcome! Type ? to list commands
+trac> help
+
+Documented commands (type help <topic>):
+========================================
+help  pprint  tactions  tassign  tcreate  tdelete  tget  tquery  tupdate
+
+Undocumented commands:
+======================
+EOF  alerta  exit  method  slurm  status
+
+trac> tcreate
+usage: tcreate [-h] [-t {defect,enhancment,task}] [-c COMPONENT]
+               [-p {minor,trivial,major,critical,blocker}] -s SUMMARY -d
+               DESCRIPTION -n NODE
+tcreate: error: the following arguments are required: -s/--summary, -d/--description, -n/--node
+trac> help tupdate
+tupdate <ID> <UPDATE>
+Ticket Update
+Updates existing ticket <ID> with string <UPDATE>
+Example:
+    tup 6 This is an update to ticket 6 
+
+trac> help tassign
+ tassign <TICKET_ID> <NEW_OWNER>
+(Re)assign a ticket <TICKET_ID> to user <NEW_OWNER>
+
+trac> help tquery
+ tq [parameters]
+Ticket Query
+Without any parameters return all open tickets         
+Can filter on any parameters e.g to find closed tickets for host x1000c0s0b0n0:
+    tq hostname=x1000c0s0bn0&status=closed
+Note: parameters can be inverted with ! i.e show all not closed tickets:
+    tq status=!closed 
+}}}

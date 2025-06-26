@@ -1,0 +1,498 @@
+#! /usr/bin/env bash
+
+# git-watch
+# Copyright (C) 2024
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+VERSION="1.31.0"
+
+function entries {
+  for ARRAY_NAME in $@; do
+    local -n ARRAY=$ARRAY_NAME
+    local KEY
+    for KEY in "${!ARRAY[@]}"; do
+      echo "$KEY=${ARRAY[$KEY]}"
+    done
+  done
+}
+
+function log_levels {
+  entries LOG_LEVELS | sort -t= -k2 | awk -F= '{print $1}' | paste -sd\|
+}
+
+function usage {
+  cat << EOF
+Usage: ${0##*/} [-hvx] [-e <$(log_levels)>] [-i DELAY] [-l FILE] [-o DELAY] [-p PORT] [-s SERVER] [-t TRIGGERS] dirs...
+	-e   Log level. Default = $DEFAULT_LOG_LEVEL
+	-h   Display help
+	-i   Inotify delay in seconds. Default = $DEFAULT_INOTIFY_DELAY
+	-l   File to log inotify events to. Events will not be logged if not specified.
+	-o   Periodic delay in seconds. Default = $DEFAULT_PERIODIC_DELAY
+	-p   Notification port. Default = $DEFAULT_NOTIFICATION_PORT
+	-s   Notification server. Default = $DEFAULT_NOTIFICATION_SERVER
+	-t   Comma separated list of triggers to enable. Possible triggers: inotify, periodic, reconnect, remote, resume, startup,
+	     user, * (any string, which will trigger a sync when it's written to the sync directory's pipe)
+	     Default = $DEFAULT_TRIGGERS
+	-v   Display version
+	-x   Enable debug mode
+	dirs The directories to watch
+EOF
+  exit "$1"
+}
+
+function print_help {
+  trigger_enabled "user" && echo "$HELP" || echo "${HELP/$'\n'  s: sync now/}"
+}
+
+function log {
+  if [ ${LOG_LEVELS[$1]} -ge ${LOG_LEVELS[$LOG_LEVEL]} ]; then
+    if [ "$3" ]; then
+      _log "$2" "$3"
+    else
+      while read -r; do
+        _log "$2" ">> $REPLY"
+      done
+    fi
+  else
+    cat >/dev/null
+  fi
+}
+
+function _log {
+  if [ ! "$1" ]; then
+    printf "%s | %s\n" "$(date "+%Y-%m-%d %H:%M:%S")" "$2"
+  else
+    printf "%s | %-11s | %s\n" "$(date "+%Y-%m-%d %H:%M:%S")" "${1##*/}" "$2"
+  fi
+}
+
+function kill_and_let_finish_process {
+  local PID="$1"
+  kill "$PID" &>/dev/null
+  wait "$PID" &>/dev/null
+}
+
+function write_to_all_pipes {
+  local MESSAGE="$1"
+  for PIPE in "${PIPES[@]}"; do
+    echo "$MESSAGE" > "$PIPE"
+  done
+}
+
+function trigger_enabled {
+  local TRIGGER="$1"
+  local IFS=","
+  for ENABLED_TRIGGER in $TRIGGERS; do
+    [ "$TRIGGER" = "$ENABLED_TRIGGER" ] && return 0
+  done
+  return 1
+}
+
+function trigger_inotify {
+  local DIR="$1"
+  local PIPE="$2"
+
+  declare -i COUNT=0
+  local IEVENTS
+  local IDIR
+  local IFILE
+  local ITIME
+
+  local IFS= # To make sure spaces before or after are not removed
+  local IN_MSYS
+  [[ $(uname -s) = MSYS* ]] && IN_MSYS="true" || IN_MSYS="false"
+
+  while true; do
+    if [ "$IN_MSYS" = "true" ]; then
+      inotifywait -qrm -e "create,modify,delete,move" --format "%e|%w|%f|%T|" --exclude '\\\.git(\\|$)' "$DIR" |
+      while read -r -d '|' TOKEN; do
+        process_token
+      done
+    else
+      inotifywait -qrm -e "create,modify,delete,move,attrib" --format "%e|%w|%f|%T|" --timefmt "%Y-%m-%d %H:%M:%S" --exclude '/\.git/' "$DIR" |
+      while read -r -d '|' TOKEN; do
+        process_token
+      done
+    fi
+    COUNT=0
+    log "ERROR" "$DIR" "inotifywait pipe fell through, retrying"
+  done
+}
+
+function process_token {
+  local RESULT;
+  case $COUNT in
+    0) IEVENTS="${TOKEN#*$'\n'}" ;; # Remove carriage return (MSYS only) and newline
+    1) IDIR="$TOKEN" ;;
+    2) IFILE="$TOKEN" ;;
+    3) ITIME="$TOKEN" ;;
+  esac
+  if [ $COUNT -eq 3 ]; then
+    if [ ! -f "${PIPES["$DIR"]}_stop_inotify" ]; then
+      if ! should_ignore; then
+        RESULT="PASS"
+        kill_and_let_finish_process "$SLEEP_PID"
+        { sleep "$INOTIFY_DELAY"; echo "inotify" > "$PIPE"; } & SLEEP_PID="$!"
+      else
+        RESULT="IGNORE"
+      fi
+      [ ! -z $INOTIFY_LOG_FILE ] && echo "$ITIME $RESULT $IEVENTS $IDIR $IFILE" >> "$INOTIFY_LOG_FILE"
+    fi
+    COUNT=0
+  else
+    ((COUNT++))
+  fi
+}
+
+function should_ignore {
+  [ "$IEVENTS" = "CREATE,ISDIR" ] \
+  || [ "$IEVENTS" = "DELETE,ISDIR" ] \
+  || [ "$IEVENTS" = "MODIFY,ISDIR" ] \
+  || [ "$IEVENTS" = "ATTRIB,ISDIR" ] \
+  || git -C "$DIR" check-ignore $(realpath -m ${IDIR}/${IFILE}) >/dev/null
+}
+
+function trigger_periodic {
+  while true; do
+    sleep "$PERIODIC_DELAY"
+    write_to_all_pipes "periodic"
+  done
+}
+
+function trigger_remote {
+  # Make sure $NOTIFICATION_PIPE is read from so that it doesn't block when writing to it,
+  # in case connection to notification server fails at startup.
+  send_notifications & sn_pid="$!"
+  while true; do
+    { exec 3<>"/dev/tcp/$NOTIFICATION_SERVER/$NOTIFICATION_PORT"; } &>/dev/null && {
+      log "INFO" "" "connected to $NOTIFICATION_SERVER:$NOTIFICATION_PORT"
+      echo $(hostname) >&3
+      kill_and_let_finish_process "$sn_pid"
+      send_notifications & sn_pid="$!"
+      read CONNECT_STRING <&3 && sync_on_reconnect && write_to_all_pipes "reconnect"
+      while read FIRST_COMMIT <&3; do
+        for DIR in "${!FIRST_COMMITS[@]}"; do
+          if [ $FIRST_COMMIT = ${FIRST_COMMITS[$DIR]} ]; then
+            echo "remote" > "${PIPES[$DIR]}"
+            break
+          fi
+        done
+      done
+    }
+    log "INFO" "" "disconnected from server, retrying connect in 5 secs"
+    sleep 5
+  done
+}
+
+function send_notifications {
+  while true; do
+    while read OUT_MESSAGE <"$NOTIFICATION_PIPE"; do
+      echo "$OUT_MESSAGE" >&3
+    done
+    log "ERROR" "" "read OUT_MESSAGE failed, retrying"
+  done
+}
+
+function sync_on_reconnect {
+  if trigger_enabled "startup"; then
+    # When the startup trigger is enabled, only sync on connect when
+    # the connection was established more than 5 seconds after startup.
+    [ $(($(date +%s) - $START_TIME)) -gt 5 ] && return 0 || return 1
+  fi
+  return 0
+}
+
+function trigger_startup {
+  write_to_all_pipes "startup"
+}
+
+function handle_triggers {
+  local DIR="$1"
+  local PIPE="$2"
+  local PAUSED="false"
+  local LAST_UPDATE=0
+  local TRIGGER
+  while true; do
+    while read TRIGGER <"$PIPE"; do
+      case "$TRIGGER" in
+        "pause")
+          [ "$PAUSED" = "false" ] \
+            && { PAUSED="true"; log "INFO" "$DIR" "paused"; true; } \
+            || log "INFO" "$DIR" "already paused"
+          ;;
+        "resume")
+          [ "$PAUSED" = "true" ] \
+            && { PAUSED="false"; log "INFO" "$DIR" "resumed"; trigger_enabled "$TRIGGER" && sync; true; } \
+            || log "INFO" "$DIR" "not paused"
+          ;;
+        "inotify")
+          trigger_enabled "$TRIGGER" \
+            && [ "$PAUSED" = "false" ] \
+            && [[ $(date +%s%N)-$INOTIFY_DELAY*1000000000 -gt $LAST_UPDATE ]] \
+            && sync
+          ;;
+        *)
+          trigger_enabled "$TRIGGER" && [ "$PAUSED" = "false" ] && sync
+          ;;
+      esac
+    done
+    log "ERROR" "$DIR" "read TRIGGER failed, retrying"
+  done
+}
+
+function _git {
+  log "DEBUG" "$DIR" "<$1>"
+  git -C "$DIR" "$@" 2>&1 | log "TRACE" "$DIR"
+}
+
+function _git_add_and_commit {
+  _git add -A
+  _git commit -m "$(make_commit_msg)"
+}
+
+function make_commit_msg {
+  COMMIT_MSG_CMD=$( \
+    awk '/^commit_msg_command=/ {print substr($0, index($0, "=") + 1)}' "$DIR/.git-watch" 2>/dev/null | \
+    sed 's/^[[:blank:]]*//;s/[[:blank:]]*$//' \
+  )
+  [ -z "$COMMIT_MSG_CMD" ] && eval "$DEFAULT_COMMIT_MSG_CMD" || eval "$COMMIT_MSG_CMD"
+}
+
+function lfs_server_reachable {
+  if [ -f "$DIR"/.lfsconfig ]; then
+    local URL=$(cat "$DIR"/.lfsconfig | grep url)
+    [ -z "$URL" ] && return 0
+    local HOST_PORT=$(echo "$URL" | sed 's|[^/]*\/\/||g')
+    local HOST=${HOST_PORT%:*}
+    local PORT=${HOST_PORT#*:}
+    [ "$PORT" = "$HOST" ] && PORT="80"
+    exec 4<"/dev/tcp/$HOST/$PORT"
+    local RESULT="$?"
+    exec 4<&-
+    return "$RESULT"
+  fi
+  return 0
+}
+
+function dir_is_clean {
+  [ ! "$(git -C "$DIR" status -s)" ]
+}
+
+function branch_is_behind {
+  [ "$(git -C "$DIR" status -uno | grep -P "behind|diverged")" ]
+}
+
+function branch_is_ahead {
+  [ "$(git -C "$DIR" status -uno | grep "branch is ahead of")" ]
+}
+
+function sync {
+  if ! lfs_server_reachable; then
+    log "ERROR" "$DIR" "issue connecting to lfs server, will not sync."
+    return 1;
+  fi
+
+  log "INFO" "$DIR" "sync triggered by $TRIGGER"
+
+  if ! dir_is_clean; then
+    LAST_UPDATE=$(date +%s%N)
+    _git_add_and_commit
+  fi
+
+  _git fetch
+
+  if branch_is_behind; then
+    log "DEBUG" "$DIR" "<merge>"
+    touch "${PIPES["$DIR"]}_stop_inotify"
+    git -C "$DIR" merge -m "$(make_commit_msg)" | grep "CONFLICT" >/dev/null
+    local NO_CONFLICT="$?"
+    rm "${PIPES["$DIR"]}_stop_inotify"
+    [ "$NO_CONFLICT" = 0 ] && _git_add_and_commit
+  fi
+
+  if branch_is_ahead; then
+    _git push
+    trigger_enabled "remote" && echo ${FIRST_COMMITS[$DIR]} > "$NOTIFICATION_PIPE"
+  fi
+
+  log "INFO" "$DIR" "sync complete"
+}
+
+function first_commit {
+  git -C "$1" rev-list --max-parents=0 HEAD
+}
+
+function parse_args {
+  while getopts ":e:hi:l:o:p:s:t:vx" OPT; do
+    case "$OPT" in
+      e)  LOG_LEVEL="$OPTARG" ;;
+      h)  usage 0 ;;
+      i)  INOTIFY_DELAY="$OPTARG" ;;
+      l)  INOTIFY_LOG_FILE="$OPTARG" ;;
+      o)  PERIODIC_DELAY="$OPTARG" ;;
+      p)  NOTIFICATION_PORT="$OPTARG" ;;
+      s)  NOTIFICATION_SERVER="$OPTARG" ;;
+      t)  TRIGGERS="$OPTARG" ;;
+      v)  echo "$VERSION"; exit 0 ;;
+      x)  DEBUG_ENABLED="true" ;;
+      \?) echo "Unknown option"; usage 1 ;;
+      :)  echo "Missing argument to option"; usage 1 ;;
+      *)  echo "Unhandled option $OPT"; usage 1 ;;
+    esac
+  done
+  shift $(($OPTIND - 1))
+
+  [ "$DEBUG_ENABLED" = "true" ] && set -x
+
+  DIR_ARGS=( "${@%/}" )
+
+  [ -z ${TRIGGERS+x} ] && TRIGGERS="$DEFAULT_TRIGGERS"
+  [ -z "$TRIGGERS" ] && { echo "No triggers specified"; exit 1; }
+
+  [ -z ${LOG_LEVEL+x} ] && LOG_LEVEL="$DEFAULT_LOG_LEVEL"
+  [ -z "$LOG_LEVEL" ] && { echo "No log level specified"; exit 1; }
+  [[ ! " ${!LOG_LEVELS[*]} " =~ " ${LOG_LEVEL} " ]] && { echo "Unknown log level"; exit 1; }
+
+  if trigger_enabled "inotify"; then
+    [ -z ${INOTIFY_DELAY+x} ] && INOTIFY_DELAY="$DEFAULT_INOTIFY_DELAY"
+    [[ ! $INOTIFY_DELAY =~ [0-9]+ ]] && { echo "Invalid inotify delay: \"$INOTIFY_DELAY\""; exit 1; }
+  fi
+
+  if trigger_enabled "periodic"; then
+    [ -z ${PERIODIC_DELAY+x} ] && PERIODIC_DELAY="$DEFAULT_PERIODIC_DELAY"
+    [[ ! $PERIODIC_DELAY =~ [0-9]+ ]] && { echo "Invalid periodic delay: \"$PERIODIC_DELAY\""; exit 1; }
+  fi
+
+  if ! trigger_enabled "remote" && trigger_enabled "reconnect"; then
+    echo "The reconnect trigger can only be enabled when the remote trigger is enabled"
+    exit 1;
+  fi
+
+  if trigger_enabled "remote"; then
+    [ -z ${NOTIFICATION_SERVER+x} ] && NOTIFICATION_SERVER="$DEFAULT_NOTIFICATION_SERVER"
+    [ -z "$NOTIFICATION_SERVER" ] && { echo "No notification server specified"; exit 1; }
+    [ -z ${NOTIFICATION_PORT+x} ] && NOTIFICATION_PORT="$DEFAULT_NOTIFICATION_PORT"
+    [[ ! $NOTIFICATION_PORT =~ [0-9]+ ]] && { echo "Invalid notification port: \"$NOTIFICATION_PORT\""; exit 1; }
+  fi
+}
+
+DEFAULT_INOTIFY_DELAY="60"
+DEFAULT_PERIODIC_DELAY="300"
+DEFAULT_NOTIFICATION_SERVER="localhost"
+DEFAULT_NOTIFICATION_PORT="19725"
+DEFAULT_TRIGGERS="inotify,resume,startup,user"
+DEFAULT_COMMIT_MSG_CMD='echo -n "Commit on $(hostname), trigger=$TRIGGER"'
+DEFAULT_LOG_LEVEL="INFO"
+
+DEBUG_ENABLED="false"
+
+declare -A LOG_LEVELS
+LOG_LEVELS[TRACE]=0
+LOG_LEVELS[DEBUG]=10
+LOG_LEVELS[INFO]=20
+LOG_LEVELS[WARN]=30
+LOG_LEVELS[ERROR]=40
+LOG_LEVELS[OFF]=50
+
+HELP=$(cat << EOF
+Supported keys:
+  h: help
+  l: list pipes
+  p: pause
+  q: quit
+  r: resume
+  s: sync now
+  v: print version
+EOF
+)
+
+parse_args "$@"
+
+START_TIME=$(date +%s);
+WORK_DIR=$(mktemp -d -t git-watch.XXXXX)
+trap "rm -r "$WORK_DIR"; kill -TERM -- -$$" EXIT
+
+declare -A PIPES
+declare -A FIRST_COMMITS
+declare -a DIRS
+for DIR in "${DIR_ARGS[@]}"; do
+  if [ ! -d "$DIR" ]; then
+    echo "$DIR is not a directory or does not exist - ignoring"
+  else
+    if [ ! -d "$DIR/.git" ]; then
+      echo "$DIR is not a git directory - ignoring"
+    else
+      DIRS+=( "$DIR" )
+      INODE="$(ls -id "$DIR" | awk '{print $1}')"
+      PIPE="$WORK_DIR/$INODE"
+      PIPES["$DIR"]="$PIPE"
+      mkfifo "$PIPE"
+      FIRST_COMMITS["$DIR"]=$(first_commit "$DIR")
+    fi
+  fi
+done
+[ ${#DIRS[@]} = 0 ] && { echo "No (valid) directories specified"; exit 1; }
+
+if [ ! -z "$INOTIFY_LOG_FILE" ]; then
+  touch -- "$INOTIFY_LOG_FILE" || { echo "Unable to create inotify log file $INOTIFY_LOG_FILE"; exit 1; }
+fi
+
+echo "git-watch v$VERSION"
+print_help
+
+trigger_enabled "remote" && {
+  # Must set NOTIFICATION_PIPE variable before enabling
+  # inotify trigger, because inotify trigger needs it
+  # when a sync is complete.
+  NOTIFICATION_PIPE="$WORK_DIR/notifications"
+  mkfifo "$NOTIFICATION_PIPE"
+  trigger_remote &
+}
+for DIR in "${DIRS[@]}"; do
+  PIPE="${PIPES[$DIR]}"
+  handle_triggers "$DIR" "$PIPE" &
+  trigger_enabled "inotify" && trigger_inotify "$DIR" "$PIPE" &
+done
+trigger_enabled "periodic" && trigger_periodic &
+trigger_enabled "startup" && trigger_startup &
+
+while true; do
+  read -n1 -s INPUT
+  case "$INPUT" in
+    "h")
+      print_help
+      ;;
+    "l")
+      for DIR in "${DIRS[@]}"; do
+        echo "$DIR: ${PIPES[$DIR]}"
+      done
+      ;;
+    "p")
+      write_to_all_pipes "pause"
+      ;;
+    "q")
+      exit 0
+      ;;
+    "r")
+      write_to_all_pipes "resume"
+      ;;
+    "s")
+      write_to_all_pipes "user"
+      ;;
+    "v")
+      echo "$VERSION"
+      ;;
+  esac
+done

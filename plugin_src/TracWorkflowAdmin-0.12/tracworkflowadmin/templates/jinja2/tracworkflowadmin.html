@@ -1,0 +1,224 @@
+# extends 'admin.html'
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      # block admintitle
+      ${dgettext('tracworkflowadmin', 'Workflow Admin')}
+      # endblock admintitle
+    </title>
+    # block head
+    ${ super() }
+    # endblock head
+  </head>
+  <body>
+    # block adminpanel
+    <h2>${dgettext('tracworkflowadmin', 'Workflow Admin')}</h2>
+    <p>${help}</p>
+    <form method="post" id="dummy-form" action="${panel_href()}">
+      ${jmacros.form_token_input()}
+      # if editor_mode == 'gui':
+      <div>
+        <fieldset>
+          <legend>${dgettext('tracworkflowadmin', 'Actions')}</legend>
+          <div>
+            <button id="line-up">${dgettext('tracworkflowadmin', 'Move up')}</button>
+            <button id="line-down">${dgettext('tracworkflowadmin', 'Move down')}</button>
+            <button id="line-remove">${dgettext('tracworkflowadmin', 'Remove')}</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>${dgettext('tracworkflowadmin', 'Columns')}</legend>
+          <div id="setview">
+            <label for="setview-logname">
+              <input type="checkbox" id="setview-logname" checked="checked" />
+              ${dgettext('tracworkflowadmin', 'Display name')}
+            </label>
+            <label for="setview-operations">
+              <input type="checkbox" id="setview-operations" />
+              ${dgettext('tracworkflowadmin', 'Operations')}
+            </label>
+            <label for="setview-permissions">
+              <input type="checkbox" id="setview-permissions" />
+              ${dgettext('tracworkflowadmin', 'Permissions')}
+            </label>
+            <label for="setview-next-status">
+              <input type="checkbox" id="setview-next-status" checked="checked" />
+              ${dgettext('tracworkflowadmin', 'Next status')}
+            </label>
+          </div>
+        </fieldset>
+      </div>
+      <div id="table-wrapper" style="display:none">
+        <table id="elements">
+          <thead>
+            <tr>
+              <th rowspan="3" class="col-line-select"></th>
+              <th rowspan="3" class="col-action">${
+                  dgettext('tracworkflowadmin', 'Actions')
+                }<img id="add-action" class="ui-icon ui-icon-plusthick"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}" /></th>
+              <th rowspan="3" class="col-logname">${dgettext('tracworkflowadmin', 'Display name')}</th>
+              <th rowspan="3" class="col-operations" >${dgettext('tracworkflowadmin', 'Operations')}</th>
+              <th rowspan="3" class="col-permissions">${dgettext('tracworkflowadmin', 'Permissions')}</th>
+              <th rowspan="3" class="col-next-status">${dgettext('tracworkflowadmin', 'Next status')}</th>
+              <th id="status-header-bar" colspan="${len(status)}">${
+                  dgettext('tracworkflowadmin', 'Statuses')
+                }<img id="add-status" class="ui-icon ui-icon-plusthick"
+                      src="${href.chrome('tracworkflowadmin/transparent.gif')}" /></th>
+            </tr>
+            <tr id="status-editor-1">
+              # for stat in status:
+              <th class="editable"><span>${stat}</span><input type="text" value="${stat}" /><a href="#top">×</a></th>
+              # endfor
+            </tr>
+            <tr id="status-editor-2">
+              # for stat in status:
+              <th>&#8203;<!--
+                --><img class="ui-icon ui-icon-arrowthick-1-w left-status"
+                        src="${href.chrome('tracworkflowadmin/transparent.gif')}" /><!--
+                --><img class="ui-icon ui-icon-arrowthick-1-e right-status"
+                        src="${href.chrome('tracworkflowadmin/transparent.gif')}" /><!--
+                --><img class="ui-icon ui-icon-close del-status"
+                        src="${href.chrome('tracworkflowadmin/transparent.gif')}" /><!--
+              --></th>
+              # endfor
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <td class="col-line-select">&#8203;<!--
+                --><img class="ui-icon ui-icon-play"
+                        src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+                /></td>
+              <td class="editable col-action"><span>${dgettext('tracworkflowadmin', 'action')}</span><input type="text" value="action" /><a href="#top">×</a></td>
+              <td class="editable col-logname"><span >${dgettext('tracworkflowadmin', 'Action name')}</span><input type="text" value="${dgettext('tracworkflowadmin', 'Action name')}" /><a href="#top">×</a></td>
+              <td class="col-operations selectable">
+                <select multiple="multiple">
+                  # for op in operations:
+                  <option>${op}</option>
+                  # endfor
+                </select>
+              </td>
+              <td class="col-permissions selectable">
+                <select multiple="multiple">
+                  # for perm in perms:
+                  <option${{'selected': loop.index0 == 0}|htmlattr}>${perm}</option>
+                  # endfor
+                </select>
+              </td>
+              <td class="col-next-status selectable">
+                <select>
+                  <option>*</option>
+                  # for stat in status:
+                  <option>${stat}</option>
+                  # endfor
+                </select>
+              </td>
+              <td class="col-before-status status-checked">&#8203;<!--
+                --><img class="ui-icon ui-icon-check"
+                        src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+                /></td>
+            </tr>
+          </tfoot>
+          <tbody>
+            # for action in actions:
+            <tr>
+              <td class="col-line-select">&#8203;<!--
+                --><img class="ui-icon ui-icon-play"
+                        src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+                /></td>
+              <td class="editable col-action"><span>${action['action']}</span><input type="text" value="${action['action']}" /><a href="#top">×</a></td>
+              <td class="editable col-logname"><span>${action['name']}</span><input type="text" value="${action['name']}" /><a href="#top">×</a></td>
+              <td class="col-operations selectable">
+                <select multiple="multiple">
+                  # for op in action['operations']:
+                  <option selected="selected">${op}</option>
+                  # endfor
+                  # for op in operations:
+                  #   if op not in action['operations']:
+                  <option>${op}</option>
+                  #   endif
+                  # endfor
+                </select>
+              </td>
+              <td class="col-permissions selectable">
+                <select multiple="multiple">
+                  # for perm in perms:
+                  <option${
+                      {'selected': action['permissions'] and perm in action['permissions']}|htmlattr
+                    }>${perm}</option>
+                  # endfor
+                </select>
+              </td>
+              <td class="col-next-status selectable">
+                <select>
+                  <option>*</option>
+                  # for stat in status:
+                  <option${
+                      {'selected': action['next'] == stat}|htmlattr
+                    }>${stat}</option>
+                  # endfor
+                </select>
+              </td>
+              # for stat in status:
+              <td class="${(stat in action['before'] or '*' in action['before'])
+                           and 'col-before-status status-checked'
+                           or 'col-before-status'
+                          }">&#8203;<img
+                class="ui-icon ui-icon-check"
+                src="${href.chrome('tracworkflowadmin/transparent.gif')}"
+              /></td>
+              # endfor
+            </tr>
+            # endfor
+          </tbody>
+        </table>
+      </div>
+      # elif editor_mode == 'text':
+      <p>
+        <textarea id="text-data" name="text-data" cols="80" rows="15">${text}</textarea>
+      </p>
+      # endif
+      <p>
+        <input id="submit-button" type="submit" value="${dgettext('tracworkflowadmin', 'Save changes')}" />
+        <input id="reset-button" type="submit" value="${dgettext('tracworkflowadmin', 'Cancel')}" />
+        <input id="init-button" type="submit" value="${dgettext('tracworkflowadmin', 'Restore initial state')}" />
+        # if editor_mode == 'gui':
+          <input id="textmode-button" type="submit"
+                 value="${dgettext('tracworkflowadmin', 'Text mode')}" />
+        # elif editor_mode == 'text':
+          <input id="guimode-button" type="submit"
+                 value="${dgettext('tracworkflowadmin', 'GUI mode')}" />
+        # endif
+      </p>
+    </form>
+    <div class="warning system-message" style="display:none"></div>
+    <fieldset id="chart-area">
+      <legend>${dgettext('tracworkflowadmin', 'Workflow diagram')}</legend>
+      <p>
+        <button id="chart-update-button">${dgettext('tracworkflowadmin', 'Update')}</button>
+        <span id="chart-update-status">${dgettext('tracworkflowadmin', 'Updating...')}</span>
+      </p>
+      <div id="image-area" style="display:none"><img alt="${dgettext('tracworkflowadmin', 'diagram')}" /></div>
+    </fieldset>
+    <form id="main-form" method="post" action="${panel_href()}">
+      ${jmacros.form_token_input()}
+      <p>
+        <input id="editor-mode" name='editor_mode' type="hidden" value="${editor_mode}" />
+        <textarea name="params" rows="4" cols="4"></textarea>
+      </p>
+    </form>
+    <div id="new-action-input-dialog" class="dialog"
+         title="${dgettext('tracworkflowadmin', 'Add new action')}">
+      <p>${dgettext('tracworkflowadmin', 'Enter new action that consists of alphabet or digits.')}</p>
+      <input class="trac-fullwidth" />
+    </div>
+    <div id="new-status-input-dialog" class="dialog"
+         title="${dgettext('tracworkflowadmin', 'Add new status')}">
+      <p>${dgettext('tracworkflowadmin', 'Enter new status name that consists of alphabet or digits.')}</p>
+      <input class="trac-fullwidth" />
+    </div>
+    # endblock adminpanel
+  </body>
+</html>

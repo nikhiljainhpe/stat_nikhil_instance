@@ -1,0 +1,110 @@
+# extends 'layout.html'
+# set _ = partial(dgettext, domain)
+# set tag_ = partial(dtgettext, domain)
+# set title = _("Remote Procedure Call (RPC)")
+
+# block title
+${title} ${ super() }
+# endblock title
+
+# block content
+  <div id="content" class="wiki">
+    <div class="wikipage searchable">
+      <div id="wikipage" class="trac-content borderless">
+        <h1 class="section">${title}</h1>
+        <p><strong>${_("Installed API version:")}</strong> ${rpc.version}</p>
+        <h2 id="Protocols" class="section">${_("Protocol reference:")}</h2>
+        <p>${
+          _("Below you will find a detailed description of all the RPC "
+            "protocols installed in this environment. This includes supported "
+            "content types as well as target URLs for anonymous and "
+            "authenticated access. Use this information to interact with this "
+            "environment from a remote location.")
+        }</p>
+        <p>${
+          _("Libraries for remote procedure calls and parsing exists for most "
+            "major languages and platforms - use a tested, standard library "
+            "for consistent results.")
+        }</p>
+
+        # for name, description, paths in rpc.protocols:
+        <dl>
+          <h3 id="${name}" class="section">${name}</h3>
+          <dd>
+            <p>${_("For %(name)s protocol, use any one of:", name=name)}</p>
+            <ul>
+              # for ct, ct_group in paths|groupby(1):
+              #   with ct_group = ct_group|list
+              <li>
+                ${tag_("%(header)s header with request to:",
+                       header=tag.tt('Content-Type: ', ct))}
+                <ul>
+                  <li>
+                    ${_("For anonymous access:")}
+                    <ul>
+                      # for h, mimetype in ct_group:
+                      #   with url = req.abs_href(h)
+                      <li><a href="${url}">${url}</a></li>
+                      #   endwith
+                      # endfor
+                    </ul>
+                  </li>
+                  <li>
+                    ${_("For authenticated access:")}
+                    <ul>
+                      # for h, mimetype in ct_group:
+                      #   with url = req.abs_href.login(h)
+                      <li>
+                        <a href="${url}">${url}</a>
+                      </li>
+                      #   endwith
+                      # endfor
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              #   endwith
+              # endfor
+            </ul>
+            <div>${wiki_to_html(context, description)}</div>
+          </dd>
+        </dl>
+        # endfor
+
+        <h2 id="Methods" class="section">${_("RPC exported functions")}</h2>
+
+        <div id="searchable">
+          # for key in rpc.functions|sort:
+          <dl>
+            # set ns = rpc.functions[key]
+            <h3 id="${'rpc.%s'|format(ns.namespace)}" class="section">
+              ${ns.namespace} - ${ns.description}
+            </h3>
+            <dd>
+              <table class="listing tickets">
+                <thead>
+                  <tr>
+                    <th style="width:40%">${_("Function")}</th>
+                    <th style="width:45%">${_("Description")}</th>
+                    <th style="width:15%">${_("Permission required")}</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  # for signature, description, permission in ns.methods:
+                  <tr class="${'color3-%s'|format('even' if loop.index0 % 2 == 0 else 'odd')}">
+                    <td style="padding-left:4em;text-indent:-4em">${signature}</td>
+                    <td>${description}</td>
+                    <td>${permission or _("By resource")}</td>
+                  </tr>
+                  # endfor
+                </tbody>
+              </table>
+            </dd>
+          </dl>
+          # endfor
+        </div>
+      </div>
+    </div>
+  </div>
+  ${ super() }
+# endblock content

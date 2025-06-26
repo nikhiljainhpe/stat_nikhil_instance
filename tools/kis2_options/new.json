@@ -1,0 +1,262 @@
+{
+    "component": {
+        "Hardware-Cooling": {
+            "sub_component":{
+                "CDU": {
+                     "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Door":{
+                     "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Blade/Switch": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Plumbing": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+        "Hardware-DL": {
+            "sub_component":{
+                "CPU":{
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Memory": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Power": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+        "Hardware-EX": {
+            "sub_component":{
+               "Blade-CPU": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Blade-Memory": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Blade-Mezz": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Control-CMM/CEC": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Hardware-Ethernet": {
+            "sub_component":{
+                "Switch": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Cabling": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Config": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Hardware-Other": {
+            "sub_component":{
+                "Hardware-Other-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-Other-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-Other-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-Other-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Hardware-Slingshot": {
+            "sub_component":{
+                "FMN config": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Image config": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 }
+            }
+        },
+         "Software-Dev": {
+            "sub_component":{
+                "CPE": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "GPU(Nvidia/AMD": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Benchmarking": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-HPCM": {
+            "sub_component":{
+                "Monitoring": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Managment": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-OS": {
+            "sub_component":{
+                "Software-OS-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Software-OS-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Software-OS-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-OS-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-Other": {
+            "sub_component":{
+                "Software-Other-option1": {
+                "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                },
+                "Software-Other-option2": {
+                "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                },
+                "Software-Other-option3": {
+                "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                },
+                "Software-Other-option4": {
+                "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                }
+                
+            }
+        },
+         "Software-Scheduler": {
+            "sub_component":{
+                "Software-Scheduler-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Software-Scheduler-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Software-Scheduler-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-Scheduler-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+	    "Software-Slingshot": {
+        "sub_component":{
+            "FMN configuration": {
+                "params_to_attach":{
+                     "logs,param1.csv":{}
+                }
+            },
+            "Host Configuration": {
+                "params_to_attach":{
+                     "logs,param2.csv":{}
+                }
+            }
+        }
+    }
+}
+}

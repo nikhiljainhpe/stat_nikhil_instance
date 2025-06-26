@@ -1,0 +1,7 @@
+for f in `trac-admin  /opt/stat/system wiki list | egrep 'WikiStart|HPCM|STAT|TracWiki|Config'  |awk '{print $1}'`; do trac-admin /opt/stat/system wiki remove $f; done
+
+trac-admin  /opt/stat/system wiki load wiki
+
+trac-admin /opt/stat/system attachment add  wiki:Config/HardwareLayout/Rackview images/rackview.png
+trac-admin /opt/stat/system attachment add  wiki:Config/HardwareLayout/Floorplan  images/floorplan.png
+

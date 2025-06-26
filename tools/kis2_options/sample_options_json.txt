@@ -1,0 +1,304 @@
+{
+    "component": {
+        "Hardware-Cooling": {
+            "sub_component":{
+                "Hardware-Cooling-option1": {
+                     "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-Cooling-option2": {
+                     "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-Cooling-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-Cooling-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+        "Hardware-DL": {
+            "sub_component":{
+                "Hardware-DL-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-DL-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-DL-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-DL-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+        "Hardware-EX": {
+            "sub_component":{
+               "Hardware-EX-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-EX-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-EX-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-EX-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Hardware-Ethernet": {
+            "sub_component":{
+                "Hardware-Ethernet-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-Ethernet-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-Ethernet-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-Ethernet-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Hardware-Other": {
+            "sub_component":{
+                "Hardware-Other-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-Other-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-Other-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-Other-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Hardware-Slingshot": {
+            "sub_component":{
+                "Hardware-Slingshot-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Hardware-Slingshot-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Hardware-Slingshot-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Hardware-Slingshot-option4": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-Dev": {
+            "sub_component":{
+                "Software-Dev-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Software-Dev-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Software-Dev-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-Dev-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-HPCM": {
+            "sub_component":{
+                "Software-HPCM-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Software-HPCM-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Software-HPCM-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-HPCM-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-OS": {
+            "sub_component":{
+                "Software-OS-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Software-OS-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Software-OS-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-OS-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-Other": {
+            "sub_component":{
+                "Software-Other-option1": {
+                "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                },
+                "Software-Other-option2": {
+                "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                },
+                "Software-Other-option3": {
+                "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                },
+                "Software-Other-option4": {
+                "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                }
+                
+            }
+        },
+         "Software-Scheduler": {
+            "sub_component":{
+                "Software-Scheduler-option1": {
+                 "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                 },
+                "Software-Scheduler-option2": {
+                 "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                 },
+                "Software-Scheduler-option3": {
+                 "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-Scheduler-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        },
+         "Software-Slingshot": {
+            "sub_component":{
+                "Software-Slingshot-option1": {
+                "params_to_attach":{
+                         "logs,param1.csv":{}
+                     }
+                },
+                "Software-Slingshot-option2": {
+                "params_to_attach":{
+                         "logs,param2.csv":{}
+                     }
+                },
+                "Software-Slingshot-option3": {
+                "params_to_attach":{
+                         "logs,param3.csv":{}
+                     }
+                 },
+                "Software-Slingshot-option4": {
+                 "params_to_attach":{
+                         "logs,param4.csv":{}
+                     }
+                 }
+                
+            }
+        }
+    }
+}

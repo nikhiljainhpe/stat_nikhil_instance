@@ -1,0 +1,1 @@
+from kis import IConfigFunction

@@ -1,0 +1,15 @@
+/* Warning: this file is auto-generated. If you edit it, changes will be lost the next time you use the simple customizer. */
+:link, :visited, dt em, .milestone .info h2 em,
+#metanav form.trac-logout button,
+#content.report h3 a em,
+#content.build h2.config :link, #content.build h2.config :visited,
+.plugin h3 a {
+ color: #00b;
+}
+/* To change red of the source path in browser, we need an extra rule to reset the grey (#998) of the first element */
+#content.browser h1 :link, #content.browser h1 :visited {
+ color: #00b;
+}
+#content.browser h1 .first:link, #content.browser h1 .first:visited {
+ color: #998;
+}

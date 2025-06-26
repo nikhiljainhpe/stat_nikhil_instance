@@ -1,0 +1,16 @@
+## Security and /root
+All system remote access will be done with user accounts, with sudo to root available on the admin node for those that need it.
+
+The root password will be periodically changed and any user ssh keys removed from /root/.ssh/authorized_keys on all nodes. 
+
+Please use your home directories, directories under /root/hpe/ or ideally /tmp for files. 
+
+__Please do not dump files in /root/__
+
+use the following:
+
+| Path              | Use                                 |
+|-------------------|-------------------------------------|
+|/root/hpe/software | Any software uploaded to the system | 
+|/root/hpe/disco    | Discovery files used/created        | 
+|/root/hpe/users    | user dirs, create your own here     |
