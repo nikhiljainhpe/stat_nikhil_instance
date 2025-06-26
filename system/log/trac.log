@@ -22197,3 +22197,681 @@ SELECT p.value AS __color__,
 2025-06-26 11:32:22,968 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_MODIFY on <Resource 'report:1'>
 2025-06-26 11:32:22,968 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_CREATE on <Resource 'report:1'>
 2025-06-26 11:32:22,968 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_DELETE on <Resource 'report:1'>
+2025-06-26 14:41:34,669 Trac[env] INFO: -------------------------------- environment startup [Trac 1.6] --------------------------------
+2025-06-26 14:41:34,708 Trac[loader] DEBUG: Adding plugin "TracBacks 0.3.0.dev0" from "/opt/stat/system/plugins/TracBacks-0.3.0.dev0-py3.11.egg"
+2025-06-26 14:41:34,708 Trac[loader] DEBUG: Adding plugin "TracMarkdownMacro 0.11.10.dev0" from "/opt/stat/system/plugins/TracMarkdownMacro-0.11.10.dev0-py3.11.egg"
+2025-06-26 14:41:34,708 Trac[loader] DEBUG: Adding plugin "TracWorkflowAdmin 0.12.0.7" from "/opt/stat/system/plugins/TracWorkflowAdmin-0.12.0.7-py3.11.egg"
+2025-06-26 14:41:34,709 Trac[loader] DEBUG: Adding plugin "TracDragDrop 0.12.0.17" from "/opt/stat/system/plugins/TracDragDrop-0.12.0.17-py3.11.egg"
+2025-06-26 14:41:34,709 Trac[loader] DEBUG: Adding plugin "StatHPCM-DBPlugin 1.0" from "/opt/stat/system/plugins/StatHPCM_DBPlugin-1.0-py3.11.egg"
+2025-06-26 14:41:34,709 Trac[loader] DEBUG: Adding plugin "TracXMLRPC 1.2.0.dev0" from "/opt/stat/system/plugins/TracXMLRPC-1.2.0.dev0-py3.11.egg"
+2025-06-26 14:41:34,709 Trac[loader] DEBUG: Adding plugin "KeepInterfaceSimple2Plugin 2.6" from "/opt/stat/system/plugins/KeepInterfaceSimple2Plugin-2.6-py3.11.egg"
+2025-06-26 14:41:34,712 Trac[loader] DEBUG: Loading plugin "TracXMLRPC" from "/opt/stat/system/plugins/TracXMLRPC-1.2.0.dev0-py3.11.egg"
+2025-06-26 14:41:34,739 Trac[loader] DEBUG: Loading plugin "kis2" from "/opt/stat/system/plugins/KeepInterfaceSimple2Plugin-2.6-py3.11.egg"
+2025-06-26 14:41:34,743 Trac[loader] DEBUG: Loading plugin "stathpcmdbplugin" from "/opt/stat/system/plugins/StatHPCM_DBPlugin-1.0-py3.11.egg"
+2025-06-26 14:41:34,784 Trac[loader] DEBUG: Loading plugin "trac.about" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,784 Trac[loader] DEBUG: Loading plugin "trac.admin.console" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,787 Trac[loader] DEBUG: Loading plugin "trac.admin.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,787 Trac[loader] DEBUG: Loading plugin "trac.attachment" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,788 Trac[loader] DEBUG: Loading plugin "trac.db.mysql" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,790 Trac[loader] DEBUG: Skipping "trac.db.mysql = trac.db.mysql_backend [mysql]": DistributionNotFound: The 'PyMySQL; extra == "mysql"' distribution was not found and is required by the application
+2025-06-26 14:41:34,790 Trac[loader] DEBUG: Loading plugin "trac.db.postgres" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,792 Trac[loader] DEBUG: Skipping "trac.db.postgres = trac.db.postgres_backend": DistributionNotFound: The 'psycopg2>=2.0 or psycopg2-binary' distribution was not found and is required by Trac
+2025-06-26 14:41:34,792 Trac[loader] DEBUG: Loading plugin "trac.db.sqlite" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,793 Trac[loader] DEBUG: Loading plugin "trac.mimeview.patch" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,793 Trac[loader] DEBUG: Loading plugin "trac.mimeview.pygments" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,798 Trac[loader] DEBUG: Loading plugin "trac.mimeview.rst" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,819 Trac[loader] DEBUG: Loading plugin "trac.mimeview.txtl" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,835 Trac[loader] DEBUG: Loading plugin "trac.notification.api" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,835 Trac[loader] DEBUG: Loading plugin "trac.notification.mail" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,835 Trac[loader] DEBUG: Loading plugin "trac.notification.prefs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,835 Trac[loader] DEBUG: Loading plugin "trac.prefs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,836 Trac[loader] DEBUG: Loading plugin "trac.search" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,836 Trac[loader] DEBUG: Loading plugin "trac.ticket.admin" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,837 Trac[loader] DEBUG: Loading plugin "trac.ticket.batch" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,837 Trac[loader] DEBUG: Loading plugin "trac.ticket.notification" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,837 Trac[loader] DEBUG: Loading plugin "trac.ticket.query" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,837 Trac[loader] DEBUG: Loading plugin "trac.ticket.report" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,838 Trac[loader] DEBUG: Loading plugin "trac.ticket.roadmap" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,838 Trac[loader] DEBUG: Loading plugin "trac.ticket.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,838 Trac[loader] DEBUG: Loading plugin "trac.timeline" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,839 Trac[loader] DEBUG: Loading plugin "trac.versioncontrol.admin" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,839 Trac[loader] DEBUG: Loading plugin "trac.versioncontrol.svn_authz" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,839 Trac[loader] DEBUG: Loading plugin "trac.versioncontrol.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,842 Trac[loader] DEBUG: Loading plugin "trac.web.auth" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,842 Trac[loader] DEBUG: Loading plugin "trac.web.main" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,842 Trac[loader] DEBUG: Loading plugin "trac.web.session" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,843 Trac[loader] DEBUG: Loading plugin "trac.wiki.admin" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,843 Trac[loader] DEBUG: Loading plugin "trac.wiki.interwiki" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,843 Trac[loader] DEBUG: Loading plugin "trac.wiki.macros" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,843 Trac[loader] DEBUG: Loading plugin "trac.wiki.web_api" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,843 Trac[loader] DEBUG: Loading plugin "trac.wiki.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,844 Trac[loader] DEBUG: Loading plugin "tracbacks" from "/opt/stat/system/plugins/TracBacks-0.3.0.dev0-py3.11.egg"
+2025-06-26 14:41:34,845 Trac[loader] DEBUG: Loading plugin "tracdragdrop.web_ui" from "/opt/stat/system/plugins/TracDragDrop-0.12.0.17-py3.11.egg"
+2025-06-26 14:41:34,850 Trac[loader] DEBUG: Loading plugin "tracmarkdown.macro" from "/opt/stat/system/plugins/TracMarkdownMacro-0.11.10.dev0-py3.11.egg"
+2025-06-26 14:41:34,859 Trac[loader] DEBUG: Loading plugin "tracmarkdown.preview_renderer" from "/opt/stat/system/plugins/TracMarkdownMacro-0.11.10.dev0-py3.11.egg"
+2025-06-26 14:41:34,859 Trac[loader] DEBUG: Loading plugin "tracopt.perm.authz_policy" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,860 Trac[loader] DEBUG: Loading plugin "tracopt.perm.config_perm_provider" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,860 Trac[loader] DEBUG: Loading plugin "tracopt.ticket.clone" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,860 Trac[loader] DEBUG: Loading plugin "tracopt.ticket.commit_updater" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,861 Trac[loader] DEBUG: Loading plugin "tracopt.ticket.deleter" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,861 Trac[loader] DEBUG: Loading plugin "tracopt.versioncontrol.git.git_fs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,864 Trac[loader] DEBUG: Loading plugin "tracopt.versioncontrol.svn.svn_fs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,865 Trac[loader] DEBUG: Loading plugin "tracopt.versioncontrol.svn.svn_prop" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:41:34,865 Trac[loader] DEBUG: Loading plugin "tracworkflowadmin.web_ui" from "/opt/stat/system/plugins/TracWorkflowAdmin-0.12.0.7-py3.11.egg"
+2025-06-26 14:41:34,881 Trac[default_workflow] DEBUG: Workflow actions at initialization: defaultdict(<class 'dict'>, {'accept': {'oldstates': ['new', 'assigned', 'accepted', 'reopened'], 'newstate': 'accepted', 'operations': ['set_owner_to_self'], 'permissions': ['TICKET_MODIFY'], 'label': 'accept', 'name': '', 'default': 0}, 'create': {'oldstates': [None], 'newstate': 'new', 'default': 1, 'label': 'create', 'name': '', 'operations': [], 'permissions': []}, 'create_and_assign': {'oldstates': [None], 'newstate': 'assigned', 'label': 'assign', 'operations': ['may_set_owner'], 'permissions': ['TICKET_MODIFY'], 'name': '', 'default': 0}, 'leave': {'oldstates': ['*'], 'newstate': '*', 'default': 1, 'operations': ['leave_status'], 'label': 'leave', 'name': '', 'permissions': []}, 'reassign': {'oldstates': ['new', 'assigned', 'accepted', 'reopened'], 'newstate': 'assigned', 'operations': ['set_owner'], 'permissions': ['TICKET_MODIFY'], 'label': 'reassign', 'name': '', 'default': 0}, 'reopen': {'oldstates': ['closed'], 'newstate': 'reopened', 'operations': ['del_resolution'], 'permissions': ['TICKET_CREATE'], 'label': 'reopen', 'name': '', 'default': 0}, 'resolve': {'oldstates': ['new', 'assigned', 'accepted', 'reopened'], 'newstate': 'closed', 'operations': ['set_resolution'], 'permissions': ['TICKET_MODIFY'], 'label': 'resolve', 'name': '', 'default': 0}, '_reset': {'default': 0, 'label': 'Reset', 'newstate': 'new', 'oldstates': [], 'operations': ['reset_workflow'], 'permissions': ['TICKET_ADMIN']}})
+
+2025-06-26 14:41:34,883 Trac[env] WARNING: [trac] base_url option not set in configuration, generated links may be incorrect
+2025-06-26 14:41:34,883 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/'">
+2025-06-26 14:41:34,884 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:41:34,884 Trac[main] DEBUG: Chosen handler is <Component trac.wiki.web_ui.WikiModule>
+2025-06-26 14:41:34,885 Trac[api] DEBUG: action controllers for ticket workflow: ['ConfigurableTicketWorkflow']
+2025-06-26 14:41:34,885 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:34,885 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:41:34,885 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:41:34,886 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:41:34,887 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TitleIndex'>
+2025-06-26 14:41:34,887 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_MODIFY on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:34,887 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'wiki:WikiStart, attachment'>
+2025-06-26 14:41:34,887 Trac[main] DEBUG: Rendering response with template wiki_view.html
+2025-06-26 14:41:34,928 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_CREATE on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:34,928 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_ADMIN on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:34,938 Trac[formatter] DEBUG: Executing Wiki macro PageOutline by provider <Component trac.wiki.macros.PageOutlineMacro>
+2025-06-26 14:41:34,939 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/QuickStart'>
+2025-06-26 14:41:34,940 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:1'>
+2025-06-26 14:41:34,940 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:OldWikiStart'>
+2025-06-26 14:41:34,940 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/ProductDocumentRepository'>
+2025-06-26 14:41:34,943 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:41:34,943 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/Cartman'>
+2025-06-26 14:41:34,943 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/CommandLineInterface'>
+2025-06-26 14:41:34,943 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/MarkdownExamples'>
+2025-06-26 14:41:34,943 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:41:34,943 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/TransparentVersionControl'>
+2025-06-26 14:41:34,944 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/HPCM'>
+2025-06-26 14:41:34,944 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/ImageManagement'>
+2025-06-26 14:41:34,944 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/STAT'>
+2025-06-26 14:41:34,944 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/SecurityAndRoot'>
+2025-06-26 14:41:34,944 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/SAT'>
+2025-06-26 14:41:34,944 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/HybridPostInstallScripts'>
+2025-06-26 14:41:34,944 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:41:34,945 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:41:34,945 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/SoftwareOverview'>
+2025-06-26 14:41:34,945 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareLayout/Rackview'>
+2025-06-26 14:41:34,945 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareLayout/Floorplan'>
+2025-06-26 14:41:34,945 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareOverview'>
+2025-06-26 14:41:34,953 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/chrome/common/css/wiki.css'">
+2025-06-26 14:41:34,953 Trac[main] DEBUG: Chosen handler is <Component trac.web.chrome.Chrome>
+2025-06-26 14:41:34,954 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_DELETE on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:34,954 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_RENAME on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:34,956 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:41:34,976 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/chrome/common/js/wiki.js'">
+2025-06-26 14:41:34,977 Trac[main] DEBUG: Chosen handler is <Component trac.web.chrome.Chrome>
+2025-06-26 14:41:34,977 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:41:34,994 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/chrome/common/extlink.gif'">
+2025-06-26 14:41:34,995 Trac[main] DEBUG: Chosen handler is <Component trac.web.chrome.Chrome>
+2025-06-26 14:41:34,997 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:41:39,719 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/newticket'">
+2025-06-26 14:41:39,719 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:41:39,719 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:41:39,719 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket'>
+2025-06-26 14:41:39,721 Trac[default_workflow] DEBUG: render_ticket_action_control: action "create"
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket'>
+2025-06-26 14:41:39,721 Trac[default_workflow] DEBUG: render_ticket_action_control: action "create_and_assign"
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:41:39,721 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket'>
+2025-06-26 14:41:39,722 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:41:39,722 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:41:39,723 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:41:39,723 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:39,723 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:41:39,723 Trac[main] DEBUG: Rendering response with template ticket.html
+2025-06-26 14:41:39,758 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_APPEND on <Resource 'ticket'>
+2025-06-26 14:41:39,758 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CHGPROP on <Resource 'ticket'>
+2025-06-26 14:41:39,758 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_DESCRIPTION on <Resource 'ticket'>
+2025-06-26 14:41:39,758 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'ticket'>
+2025-06-26 14:41:39,762 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'ticket, attachment'>
+2025-06-26 14:41:46,586 Trac[main] DEBUG: Dispatching <RequestWithSession "POST '/newticket'">
+2025-06-26 14:41:46,586 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:41:46,588 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:41:46,590 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket'>
+2025-06-26 14:41:46,590 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket'>
+2025-06-26 14:41:46,591 Trac[default_workflow] DEBUG: render_ticket_action_control: action "create"
+2025-06-26 14:41:46,591 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket'>
+2025-06-26 14:41:46,592 Trac[default_workflow] DEBUG: render_ticket_action_control: action "create_and_assign"
+2025-06-26 14:41:46,592 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:41:46,592 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:41:46,593 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:41:46,594 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket'>
+2025-06-26 14:41:46,594 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:41:46,595 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:41:46,595 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:41:46,595 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:41:46,595 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:41:46,595 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:41:46,596 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:41:46,597 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:41:46,597 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:41:46,597 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:41:46,597 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:41:46,597 Trac[main] DEBUG: Rendering response with template ticket_box.html
+2025-06-26 14:42:02,255 Trac[main] DEBUG: Dispatching <RequestWithSession "POST '/newticket'">
+2025-06-26 14:42:02,255 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:42:02,255 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:42:02,256 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket'>
+2025-06-26 14:42:02,256 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket'>
+2025-06-26 14:42:02,263 Trac[__init__] DEBUG: HPCMDB, in StatHpcmDbPlugin
+2025-06-26 14:42:02,264 Trac[web_ui] DEBUG: Side effect for ConfigurableTicketWorkflow
+2025-06-26 14:42:02,265 Trac[mail] DEBUG: Email address w/o domain: admin
+2025-06-26 14:42:02,266 Trac[mail] DEBUG: Email address w/o domain: U08QMHZF74P
+2025-06-26 14:42:02,266 Trac[mail] DEBUG: Email address w/o domain: sdgasg
+2025-06-26 14:42:02,266 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:42:02,283 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/ticket/6'">
+2025-06-26 14:42:02,284 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:42:02,284 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:42:02,284 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'ticket:6'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket:6'>
+2025-06-26 14:42:02,285 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:42:02,286 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket:6'>
+2025-06-26 14:42:02,286 Trac[default_workflow] DEBUG: render_ticket_action_control: action "leave"
+2025-06-26 14:42:02,286 Trac[default_workflow] DEBUG: render_ticket_action_control: action "resolve"
+2025-06-26 14:42:02,286 Trac[default_workflow] DEBUG: render_ticket_action_control: action "reassign"
+2025-06-26 14:42:02,286 Trac[default_workflow] DEBUG: render_ticket_action_control: action "accept"
+2025-06-26 14:42:02,287 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:42:02,287 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_APPEND on <Resource 'ticket:6'>
+2025-06-26 14:42:02,287 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'ticket:6, attachment'>
+2025-06-26 14:42:02,287 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:42:02,287 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:42:02,287 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:42:02,287 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:42:02,288 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:42:02,289 Trac[main] DEBUG: Rendering response with template ticket.html
+2025-06-26 14:42:02,290 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket:6'>
+2025-06-26 14:42:02,290 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CHGPROP on <Resource 'ticket:6'>
+2025-06-26 14:42:02,290 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_DESCRIPTION on <Resource 'ticket:6'>
+2025-06-26 14:42:02,313 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_COMMENT on <Resource 'ticket:6, comment:None'>
+2025-06-26 14:43:17,591 Trac[env] INFO: -------------------------------- environment startup [Trac 1.6] --------------------------------
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "TracBacks 0.3.0.dev0" from "/opt/stat/system/plugins/TracBacks-0.3.0.dev0-py3.11.egg"
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "TracMarkdownMacro 0.11.10.dev0" from "/opt/stat/system/plugins/TracMarkdownMacro-0.11.10.dev0-py3.11.egg"
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "TracWorkflowAdmin 0.12.0.7" from "/opt/stat/system/plugins/TracWorkflowAdmin-0.12.0.7-py3.11.egg"
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "TracDragDrop 0.12.0.17" from "/opt/stat/system/plugins/TracDragDrop-0.12.0.17-py3.11.egg"
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "StatHPCM-DBPlugin 1.0" from "/opt/stat/system/plugins/StatHPCM_DBPlugin-1.0-py3.11.egg"
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "TracXMLRPC 1.2.0.dev0" from "/opt/stat/system/plugins/TracXMLRPC-1.2.0.dev0-py3.11.egg"
+2025-06-26 14:43:17,637 Trac[loader] DEBUG: Adding plugin "KeepInterfaceSimple2Plugin 2.6" from "/opt/stat/system/plugins/KeepInterfaceSimple2Plugin-2.6-py3.11.egg"
+2025-06-26 14:43:17,640 Trac[loader] DEBUG: Loading plugin "TracXMLRPC" from "/opt/stat/system/plugins/TracXMLRPC-1.2.0.dev0-py3.11.egg"
+2025-06-26 14:43:17,669 Trac[loader] DEBUG: Loading plugin "kis2" from "/opt/stat/system/plugins/KeepInterfaceSimple2Plugin-2.6-py3.11.egg"
+2025-06-26 14:43:17,674 Trac[loader] DEBUG: Loading plugin "stathpcmdbplugin" from "/opt/stat/system/plugins/StatHPCM_DBPlugin-1.0-py3.11.egg"
+2025-06-26 14:43:17,712 Trac[loader] DEBUG: Loading plugin "trac.about" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,712 Trac[loader] DEBUG: Loading plugin "trac.admin.console" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,714 Trac[loader] DEBUG: Loading plugin "trac.admin.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,715 Trac[loader] DEBUG: Loading plugin "trac.attachment" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,715 Trac[loader] DEBUG: Loading plugin "trac.db.mysql" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,718 Trac[loader] DEBUG: Skipping "trac.db.mysql = trac.db.mysql_backend [mysql]": DistributionNotFound: The 'PyMySQL; extra == "mysql"' distribution was not found and is required by the application
+2025-06-26 14:43:17,718 Trac[loader] DEBUG: Loading plugin "trac.db.postgres" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,719 Trac[loader] DEBUG: Skipping "trac.db.postgres = trac.db.postgres_backend": DistributionNotFound: The 'psycopg2>=2.0 or psycopg2-binary' distribution was not found and is required by Trac
+2025-06-26 14:43:17,719 Trac[loader] DEBUG: Loading plugin "trac.db.sqlite" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,719 Trac[loader] DEBUG: Loading plugin "trac.mimeview.patch" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,720 Trac[loader] DEBUG: Loading plugin "trac.mimeview.pygments" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,725 Trac[loader] DEBUG: Loading plugin "trac.mimeview.rst" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,743 Trac[loader] DEBUG: Loading plugin "trac.mimeview.txtl" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,756 Trac[loader] DEBUG: Loading plugin "trac.notification.api" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,756 Trac[loader] DEBUG: Loading plugin "trac.notification.mail" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,756 Trac[loader] DEBUG: Loading plugin "trac.notification.prefs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,757 Trac[loader] DEBUG: Loading plugin "trac.prefs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,757 Trac[loader] DEBUG: Loading plugin "trac.search" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,757 Trac[loader] DEBUG: Loading plugin "trac.ticket.admin" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,758 Trac[loader] DEBUG: Loading plugin "trac.ticket.batch" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,758 Trac[loader] DEBUG: Loading plugin "trac.ticket.notification" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,758 Trac[loader] DEBUG: Loading plugin "trac.ticket.query" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,759 Trac[loader] DEBUG: Loading plugin "trac.ticket.report" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,759 Trac[loader] DEBUG: Loading plugin "trac.ticket.roadmap" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,759 Trac[loader] DEBUG: Loading plugin "trac.ticket.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,760 Trac[loader] DEBUG: Loading plugin "trac.timeline" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,760 Trac[loader] DEBUG: Loading plugin "trac.versioncontrol.admin" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,760 Trac[loader] DEBUG: Loading plugin "trac.versioncontrol.svn_authz" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,761 Trac[loader] DEBUG: Loading plugin "trac.versioncontrol.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,763 Trac[loader] DEBUG: Loading plugin "trac.web.auth" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,763 Trac[loader] DEBUG: Loading plugin "trac.web.main" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,763 Trac[loader] DEBUG: Loading plugin "trac.web.session" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,764 Trac[loader] DEBUG: Loading plugin "trac.wiki.admin" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,764 Trac[loader] DEBUG: Loading plugin "trac.wiki.interwiki" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,764 Trac[loader] DEBUG: Loading plugin "trac.wiki.macros" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,764 Trac[loader] DEBUG: Loading plugin "trac.wiki.web_api" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,764 Trac[loader] DEBUG: Loading plugin "trac.wiki.web_ui" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,765 Trac[loader] DEBUG: Loading plugin "tracbacks" from "/opt/stat/system/plugins/TracBacks-0.3.0.dev0-py3.11.egg"
+2025-06-26 14:43:17,766 Trac[loader] DEBUG: Loading plugin "tracdragdrop.web_ui" from "/opt/stat/system/plugins/TracDragDrop-0.12.0.17-py3.11.egg"
+2025-06-26 14:43:17,771 Trac[loader] DEBUG: Loading plugin "tracmarkdown.macro" from "/opt/stat/system/plugins/TracMarkdownMacro-0.11.10.dev0-py3.11.egg"
+2025-06-26 14:43:17,779 Trac[loader] DEBUG: Loading plugin "tracmarkdown.preview_renderer" from "/opt/stat/system/plugins/TracMarkdownMacro-0.11.10.dev0-py3.11.egg"
+2025-06-26 14:43:17,780 Trac[loader] DEBUG: Loading plugin "tracopt.perm.authz_policy" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,780 Trac[loader] DEBUG: Loading plugin "tracopt.perm.config_perm_provider" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,781 Trac[loader] DEBUG: Loading plugin "tracopt.ticket.clone" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,781 Trac[loader] DEBUG: Loading plugin "tracopt.ticket.commit_updater" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,781 Trac[loader] DEBUG: Loading plugin "tracopt.ticket.deleter" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,782 Trac[loader] DEBUG: Loading plugin "tracopt.versioncontrol.git.git_fs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,783 Trac[loader] DEBUG: Loading plugin "tracopt.versioncontrol.svn.svn_fs" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,784 Trac[loader] DEBUG: Loading plugin "tracopt.versioncontrol.svn.svn_prop" from "/opt/stat/python3/lib/python3.11/site-packages"
+2025-06-26 14:43:17,784 Trac[loader] DEBUG: Loading plugin "tracworkflowadmin.web_ui" from "/opt/stat/system/plugins/TracWorkflowAdmin-0.12.0.7-py3.11.egg"
+2025-06-26 14:43:17,796 Trac[default_workflow] DEBUG: Workflow actions at initialization: defaultdict(<class 'dict'>, {'accept': {'oldstates': ['new', 'assigned', 'accepted', 'reopened'], 'newstate': 'accepted', 'operations': ['set_owner_to_self'], 'permissions': ['TICKET_MODIFY'], 'label': 'accept', 'name': '', 'default': 0}, 'create': {'oldstates': [None], 'newstate': 'new', 'default': 1, 'label': 'create', 'name': '', 'operations': [], 'permissions': []}, 'create_and_assign': {'oldstates': [None], 'newstate': 'assigned', 'label': 'assign', 'operations': ['may_set_owner'], 'permissions': ['TICKET_MODIFY'], 'name': '', 'default': 0}, 'leave': {'oldstates': ['*'], 'newstate': '*', 'default': 1, 'operations': ['leave_status'], 'label': 'leave', 'name': '', 'permissions': []}, 'reassign': {'oldstates': ['new', 'assigned', 'accepted', 'reopened'], 'newstate': 'assigned', 'operations': ['set_owner'], 'permissions': ['TICKET_MODIFY'], 'label': 'reassign', 'name': '', 'default': 0}, 'reopen': {'oldstates': ['closed'], 'newstate': 'reopened', 'operations': ['del_resolution'], 'permissions': ['TICKET_CREATE'], 'label': 'reopen', 'name': '', 'default': 0}, 'resolve': {'oldstates': ['new', 'assigned', 'accepted', 'reopened'], 'newstate': 'closed', 'operations': ['set_resolution'], 'permissions': ['TICKET_MODIFY'], 'label': 'resolve', 'name': '', 'default': 0}, '_reset': {'default': 0, 'label': 'Reset', 'newstate': 'new', 'oldstates': [], 'operations': ['reset_workflow'], 'permissions': ['TICKET_ADMIN']}})
+
+2025-06-26 14:43:17,797 Trac[env] WARNING: [trac] base_url option not set in configuration, generated links may be incorrect
+2025-06-26 14:43:17,797 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/ticket/6'">
+2025-06-26 14:43:17,798 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:43:17,798 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:17,798 Trac[api] DEBUG: action controllers for ticket workflow: ['ConfigurableTicketWorkflow']
+2025-06-26 14:43:17,799 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'ticket:6'>
+2025-06-26 14:43:17,800 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket:6'>
+2025-06-26 14:43:17,801 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:43:17,801 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket:6'>
+2025-06-26 14:43:17,801 Trac[default_workflow] DEBUG: render_ticket_action_control: action "leave"
+2025-06-26 14:43:17,801 Trac[default_workflow] DEBUG: render_ticket_action_control: action "resolve"
+2025-06-26 14:43:17,802 Trac[default_workflow] DEBUG: render_ticket_action_control: action "reassign"
+2025-06-26 14:43:17,802 Trac[default_workflow] DEBUG: render_ticket_action_control: action "accept"
+2025-06-26 14:43:17,802 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:43:17,802 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_APPEND on <Resource 'ticket:6'>
+2025-06-26 14:43:17,802 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'ticket:6, attachment'>
+2025-06-26 14:43:17,802 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:43:17,802 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:43:17,802 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:43:17,802 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:17,803 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:43:17,804 Trac[main] DEBUG: Rendering response with template ticket.html
+2025-06-26 14:43:17,871 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket:6'>
+2025-06-26 14:43:17,871 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CHGPROP on <Resource 'ticket:6'>
+2025-06-26 14:43:17,871 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_DESCRIPTION on <Resource 'ticket:6'>
+2025-06-26 14:43:17,927 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_COMMENT on <Resource 'ticket:6, comment:None'>
+2025-06-26 14:43:19,989 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/ticket/6'">
+2025-06-26 14:43:19,989 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:43:19,990 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:19,990 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'ticket:6'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket:6'>
+2025-06-26 14:43:19,991 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:43:19,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket:6'>
+2025-06-26 14:43:19,992 Trac[default_workflow] DEBUG: render_ticket_action_control: action "leave"
+2025-06-26 14:43:19,992 Trac[default_workflow] DEBUG: render_ticket_action_control: action "resolve"
+2025-06-26 14:43:19,992 Trac[default_workflow] DEBUG: render_ticket_action_control: action "reassign"
+2025-06-26 14:43:19,992 Trac[default_workflow] DEBUG: render_ticket_action_control: action "accept"
+2025-06-26 14:43:19,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket:6'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_APPEND on <Resource 'ticket:6'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'ticket:6, attachment'>
+2025-06-26 14:43:19,993 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:43:19,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:19,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:43:19,995 Trac[main] DEBUG: Rendering response with template ticket.html
+2025-06-26 14:43:19,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket:6'>
+2025-06-26 14:43:19,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CHGPROP on <Resource 'ticket:6'>
+2025-06-26 14:43:19,996 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_DESCRIPTION on <Resource 'ticket:6'>
+2025-06-26 14:43:19,998 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_COMMENT on <Resource 'ticket:6, comment:None'>
+2025-06-26 14:43:25,362 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/wiki'">
+2025-06-26 14:43:25,364 Trac[main] DEBUG: Chosen handler is <Component trac.wiki.web_ui.WikiModule>
+2025-06-26 14:43:25,365 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:25,365 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:25,366 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:43:25,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:43:25,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:43:25,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:43:25,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:25,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:43:25,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:43:25,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:43:25,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TitleIndex'>
+2025-06-26 14:43:25,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_MODIFY on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:25,368 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'wiki:WikiStart, attachment'>
+2025-06-26 14:43:25,369 Trac[main] DEBUG: Rendering response with template wiki_view.html
+2025-06-26 14:43:25,388 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_CREATE on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:25,388 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_ADMIN on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:25,388 Trac[formatter] DEBUG: Executing Wiki macro PageOutline by provider <Component trac.wiki.macros.PageOutlineMacro>
+2025-06-26 14:43:25,389 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/QuickStart'>
+2025-06-26 14:43:25,390 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:1'>
+2025-06-26 14:43:25,390 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:OldWikiStart'>
+2025-06-26 14:43:25,390 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/ProductDocumentRepository'>
+2025-06-26 14:43:25,393 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:25,393 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/MarkdownExamples'>
+2025-06-26 14:43:25,393 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/CommandLineInterface'>
+2025-06-26 14:43:25,393 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/Cartman'>
+2025-06-26 14:43:25,394 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/HybridPostInstallScripts'>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/TransparentVersionControl'>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/STAT'>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/SAT'>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/HPCM'>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/SecurityAndRoot'>
+2025-06-26 14:43:25,394 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/ImageManagement'>
+2025-06-26 14:43:25,394 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:25,395 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:25,395 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareLayout/Rackview'>
+2025-06-26 14:43:25,395 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareOverview'>
+2025-06-26 14:43:25,395 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/SoftwareOverview'>
+2025-06-26 14:43:25,395 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareLayout/Floorplan'>
+2025-06-26 14:43:25,395 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_DELETE on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:25,396 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_RENAME on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:27,003 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/'">
+2025-06-26 14:43:27,003 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:27,004 Trac[main] DEBUG: Chosen handler is <Component trac.wiki.web_ui.WikiModule>
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:27,004 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:43:27,004 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:43:27,005 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:43:27,006 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:43:27,006 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TitleIndex'>
+2025-06-26 14:43:27,007 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_MODIFY on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:27,007 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'wiki:WikiStart, attachment'>
+2025-06-26 14:43:27,007 Trac[main] DEBUG: Rendering response with template wiki_view.html
+2025-06-26 14:43:27,008 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_CREATE on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:27,008 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_ADMIN on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:27,009 Trac[formatter] DEBUG: Executing Wiki macro PageOutline by provider <Component trac.wiki.macros.PageOutlineMacro>
+2025-06-26 14:43:27,010 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/QuickStart'>
+2025-06-26 14:43:27,010 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:1'>
+2025-06-26 14:43:27,010 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:OldWikiStart'>
+2025-06-26 14:43:27,011 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/ProductDocumentRepository'>
+2025-06-26 14:43:27,014 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:27,014 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/MarkdownExamples'>
+2025-06-26 14:43:27,014 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/CommandLineInterface'>
+2025-06-26 14:43:27,014 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:STAT/Cartman'>
+2025-06-26 14:43:27,015 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/HybridPostInstallScripts'>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/TransparentVersionControl'>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/STAT'>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/SAT'>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/HPCM'>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/SecurityAndRoot'>
+2025-06-26 14:43:27,015 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:HPEBestPractice/HPCM/ImageManagement'>
+2025-06-26 14:43:27,015 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:27,016 Trac[formatter] DEBUG: Executing Wiki macro TitleIndex by provider <Component trac.wiki.macros.TitleIndexMacro>
+2025-06-26 14:43:27,016 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareLayout/Rackview'>
+2025-06-26 14:43:27,016 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareOverview'>
+2025-06-26 14:43:27,016 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/SoftwareOverview'>
+2025-06-26 14:43:27,016 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:Config/HardwareLayout/Floorplan'>
+2025-06-26 14:43:27,017 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_DELETE on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:27,017 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_RENAME on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:29,361 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/newticket'">
+2025-06-26 14:43:29,361 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:43:29,362 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:29,363 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket'>
+2025-06-26 14:43:29,364 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket'>
+2025-06-26 14:43:29,364 Trac[default_workflow] DEBUG: render_ticket_action_control: action "create"
+2025-06-26 14:43:29,364 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:29,364 Trac[default_workflow] DEBUG: render_ticket_action_control: action "create_and_assign"
+2025-06-26 14:43:29,365 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:29,365 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:29,365 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:29,365 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:29,365 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:29,365 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:29,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:29,366 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:29,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:29,366 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:29,366 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket'>
+2025-06-26 14:43:29,367 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:43:29,367 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:43:29,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:43:29,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:43:29,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:29,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:43:29,368 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:43:29,369 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:43:29,369 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:43:29,369 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:43:29,369 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:43:29,370 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:43:29,371 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:43:29,371 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:43:29,372 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:29,372 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:43:29,373 Trac[main] DEBUG: Rendering response with template ticket.html
+2025-06-26 14:43:29,376 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_APPEND on <Resource 'ticket'>
+2025-06-26 14:43:29,377 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CHGPROP on <Resource 'ticket'>
+2025-06-26 14:43:29,377 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_DESCRIPTION on <Resource 'ticket'>
+2025-06-26 14:43:29,377 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'ticket'>
+2025-06-26 14:43:29,381 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'ticket, attachment'>
+2025-06-26 14:43:31,955 Trac[main] DEBUG: Dispatching <RequestWithSession "POST '/newticket'">
+2025-06-26 14:43:31,956 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:43:31,957 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:31,958 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket'>
+2025-06-26 14:43:31,959 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket'>
+2025-06-26 14:43:31,966 Trac[__init__] DEBUG: HPCMDB, in StatHpcmDbPlugin
+2025-06-26 14:43:31,966 Trac[web_ui] DEBUG: Side effect for ConfigurableTicketWorkflow
+2025-06-26 14:43:31,968 Trac[mail] DEBUG: Email address w/o domain: admin
+2025-06-26 14:43:31,968 Trac[mail] DEBUG: Email address w/o domain: admin
+2025-06-26 14:43:31,969 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket:7'>
+2025-06-26 14:43:31,991 Trac[main] DEBUG: Dispatching <RequestWithSession "GET '/ticket/7'">
+2025-06-26 14:43:31,991 Trac[main] DEBUG: Chosen handler is <Component trac.ticket.web_ui.TicketModule>
+2025-06-26 14:43:31,992 Trac[session] DEBUG: Retrieving session for ID 'admin'
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket:7'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Basic Configuration Complete'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:Hardware Shakedown Complete'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Acceptance Ready'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Benchmark Ready'>
+2025-06-26 14:43:31,992 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_VIEW on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:31,993 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_CHG_MILESTONE on <Resource 'milestone:System Customer Ready'>
+2025-06-26 14:43:31,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'ticket:7'>
+2025-06-26 14:43:31,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_CC on <Resource 'ticket:7'>
+2025-06-26 14:43:31,993 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_MODIFY on <Resource 'ticket:7'>
+2025-06-26 14:43:31,993 Trac[default_workflow] DEBUG: render_ticket_action_control: action "leave"
+2025-06-26 14:43:31,993 Trac[default_workflow] DEBUG: render_ticket_action_control: action "resolve"
+2025-06-26 14:43:31,993 Trac[default_workflow] DEBUG: render_ticket_action_control: action "reassign"
+2025-06-26 14:43:31,994 Trac[default_workflow] DEBUG: render_ticket_action_control: action "accept"
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on <Resource 'ticket:7'>
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing EMAIL_VIEW on None
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_APPEND on <Resource 'ticket:7'>
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: LegacyAttachmentPolicy allows admin performing ATTACHMENT_CREATE on <Resource 'ticket:7, attachment'>
+2025-06-26 14:43:31,994 Trac[chrome] DEBUG: Prepare chrome data for request
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing XML_RPC on None
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing ROADMAP_VIEW on None
+2025-06-26 14:43:31,994 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_VIEW on <Resource 'ticket'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing REPORT_VIEW on <Resource 'report:-1'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on None
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing SEARCH_VIEW on None
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/basics'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/logging'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing PERMISSION_GRANT on <Resource 'admin:general/perm'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TRAC_ADMIN on <Resource 'admin:general/plugin'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/components'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing MILESTONE_ADMIN on <Resource 'admin:ticket/milestones'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/versions'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/priority'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/resolution'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/severity'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/type'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_ADMIN on <Resource 'admin:ticket/workflowadmin'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TIMELINE_VIEW on <Resource 'timeline'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:WikiStart'>
+2025-06-26 14:43:31,995 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing WIKI_VIEW on <Resource 'wiki:TracGuide'>
+2025-06-26 14:43:31,996 Trac[main] DEBUG: Rendering response with template ticket.html
+2025-06-26 14:43:31,997 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CREATE on <Resource 'ticket:7'>
+2025-06-26 14:43:31,997 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_CHGPROP on <Resource 'ticket:7'>
+2025-06-26 14:43:31,997 Trac[perm] DEBUG: DefaultTicketPolicy allows admin performing TICKET_EDIT_DESCRIPTION on <Resource 'ticket:7'>
+2025-06-26 14:43:32,000 Trac[perm] DEBUG: DefaultPermissionPolicy allows admin performing TICKET_EDIT_COMMENT on <Resource 'ticket:7, comment:None'>
