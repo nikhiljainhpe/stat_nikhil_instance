@@ -3,6 +3,129 @@ HPC - System Triage and Ticketing tool  - An easy to deploy and manage ticketing
 
 Slack channel: [#hpc-stat](https://hpe.enterprise.slack.com/archives/C07NPTWSYQH)
 
+### August 11 2025 - Slack Integration by Nikhil Jain
+
+# STATtoSlackBot and ActiveTicketsBot Integration
+
+## Overview
+
+The **STATtoSlackBot** and **ActiveTicketsBot** are automated bots designed to integrate with a ticketing system, sending notifications and updates to Slack. These bots perform two primary functions:
+
+1. **STATtoSlackBot**: When a new ticket's information (e.g., summary, priority, status) is submitted through a form, this bot sends the ticket details to a designated Slack channel.
+2. **ActiveTicketsBot**: Periodically fetches active ticket data from a ticketing system, formats it, and sends them to Slack at a user-defined interval (set in hours).
+
+The system uses a Flask web application with background job scheduling to handle the ticket submission and periodic polling for active tickets. It requires setting up a `.env` file with environment variables to configure Slack webhook URLs and other relevant configurations.
+
+## Key Components
+
+1. **Flask Web Application**: A web server that handles incoming requests from the front-end and sends ticket information to Slack.
+2. **Slack Webhook Integration**: The system uses Slack Incoming Webhooks to post messages. You need to set up two webhooks:
+   - **STATtoSlackBot**: For sending new ticket information.
+   - **ActiveTicketsBot**: For posting active ticket summaries at regular intervals.
+3. **Polling Mechanism**: The system uses APScheduler to poll for active tickets at regular intervals (1, 2, 5 hours, or 1 day).
+
+## How It Works
+
+### 1. New Ticket Submission (`STATtoSlackBot`)
+
+- **Frontend**: A form is used to capture ticket information, including:
+  - **Summary**: A brief description of the issue.
+  - **Type**: The type of the issue (e.g., Bug, Feature Request).
+  - **Priority**: Priority level (e.g., High, Medium, Low).
+  - **Xname**: Additional information about the requestor or ticket context.
+  - **Action**: The status of the ticket (e.g., accepted, resolved, reassigned).
+  
+- **Backend (Flask)**:
+  - The form data is captured using a JavaScript function.
+  - Once the form is submitted, the data is sent to the Flask endpoint `/slack-proxy` as a JSON payload, which contains the ticket details.
+  - The Flask server formats this data into a message and sends it to Slack via the **STATtoSlackBot** using the configured webhook URL.
+
+### 2. Periodic Polling for Active Tickets (`ActiveTicketsBot`)
+
+- **Scheduler**: The system uses **APScheduler** to periodically fetch active tickets from a ticketing system (e.g., Trac) and send them to Slack at a configurable interval.
+- The polling frequency is defined in minutes and can be adjusted via the `/set-interval` endpoint. The interval is set by sending a POST request with the desired time in minutes (e.g., 60 for every hour).
+- The **ActiveTicketsBot** fetches the ticket data in CSV format, processes it, and sends a message to Slack with the active tickets' details.
+
+## Setting Up the Application
+
+### 1. Install Dependencies
+
+Before running the application, ensure that the following Python packages are installed:
+
+- **Flask**: Web framework for building the API.
+- **Flask-CORS**: For handling cross-origin requests.
+- **Requests**: To make HTTP requests to Slack and Trac.
+- **APScheduler**: To handle background jobs for polling active tickets.
+- **python-dotenv**: For loading environment variables.
+
+Install them using pip:
+
+```bash
+pip install Flask Flask-CORS requests apscheduler python-dotenv
+```
+
+2. Setting Up Environment Variables
+You need to set up a .env file to store sensitive information, such as Slack webhook URLs. The .env file should be placed in the root directory of your project.
+
+Create a .env file with the following contents:
+
+```bash
+# Slack Webhook URLs
+SLACK_WEBHOOK_URL=https://hooks.slack.com/triggers/your_stat_slack_webhook_url
+ACTIVE_TICKETS_WEBHOOK_URL=https://hooks.slack.com/triggers/your_active_tickets_slack_webhook_url
+
+# Optional: Set your Flask environment (default is production)
+FLASK_ENV=production
+PORT=5000
+```
+3. Running Locally
+When testing locally, you can use the provided start_standalone.sh script to configure and start everything. This script will:
+
+Set up the virtual environment.
+
+Export necessary environment variables.
+
+Start the Flask application and the Trac server.
+
+Run the script with the following command:
+
+```bash
+/opt/stat/bin/start_stat_standalone.sh
+```
+
+4. Finding the Slack Webhook URL
+To find the Slack webhook URL for your Slack workflow, follow these steps:
+
+Go to your Slack Workspace and open Slack Workflow Builder.
+
+Create a new workflow (or use an existing one) and select a trigger (e.g., when a new ticket is created or when a message is posted).
+
+Add an Action to your workflow and select Send a Webhook.
+
+Copy the Webhook URL provided by Slack.
+
+Paste the URL into your .env file in the SLACK_WEBHOOK_URL and ACTIVE_TICKETS_WEBHOOK_URL variables.
+
+6. Setting Up Polling Interval
+To set the interval for polling active tickets, you can modify the interval-select dropdown on the frontend. When the user clicks Update, the system sends the selected interval to the Flask server.
+
+The backend updates the polling interval dynamically by calling the /set-interval route. You can set the interval in hours by selecting one of the following options:
+
+1 Hour
+
+2 Hours
+
+5 Hours
+
+1 Day
+
+The system uses the selected interval to adjust the polling frequency.
+
+Error Handling
+If there is no data or invalid data provided in the form submission or when setting the interval, the system returns an appropriate error message to the user.
+
+If there are any issues connecting to Slack (e.g., timeout, network error), the system logs the error and sends a failure response.
+
 ## Quick install guide
 
 1. Download relevent version of HPE_stat rpm from rpm directory
@@ -229,126 +352,3 @@ ip -o a s dev eth0
 * added additional command line interface
 ### Sun Mar 19 2023 Lee Morecroft lee.morecroft@hpe.com - 1.0-1
 * Initial RPM package
-
-### August 11 2025 - Slack Integration by Nikhil Jain
-
-# STATtoSlackBot and ActiveTicketsBot Integration
-
-## Overview
-
-The **STATtoSlackBot** and **ActiveTicketsBot** are automated bots designed to integrate with a ticketing system, sending notifications and updates to Slack. These bots perform two primary functions:
-
-1. **STATtoSlackBot**: When a new ticket's information (e.g., summary, priority, status) is submitted through a form, this bot sends the ticket details to a designated Slack channel.
-2. **ActiveTicketsBot**: Periodically fetches active ticket data from a ticketing system, formats it, and sends them to Slack at a user-defined interval (set in hours).
-
-The system uses a Flask web application with background job scheduling to handle the ticket submission and periodic polling for active tickets. It requires setting up a `.env` file with environment variables to configure Slack webhook URLs and other relevant configurations.
-
-## Key Components
-
-1. **Flask Web Application**: A web server that handles incoming requests from the front-end and sends ticket information to Slack.
-2. **Slack Webhook Integration**: The system uses Slack Incoming Webhooks to post messages. You need to set up two webhooks:
-   - **STATtoSlackBot**: For sending new ticket information.
-   - **ActiveTicketsBot**: For posting active ticket summaries at regular intervals.
-3. **Polling Mechanism**: The system uses APScheduler to poll for active tickets at regular intervals (1, 2, 5 hours, or 1 day).
-
-## How It Works
-
-### 1. New Ticket Submission (`STATtoSlackBot`)
-
-- **Frontend**: A form is used to capture ticket information, including:
-  - **Summary**: A brief description of the issue.
-  - **Type**: The type of the issue (e.g., Bug, Feature Request).
-  - **Priority**: Priority level (e.g., High, Medium, Low).
-  - **Xname**: Additional information about the requestor or ticket context.
-  - **Action**: The status of the ticket (e.g., accepted, resolved, reassigned).
-  
-- **Backend (Flask)**:
-  - The form data is captured using a JavaScript function.
-  - Once the form is submitted, the data is sent to the Flask endpoint `/slack-proxy` as a JSON payload, which contains the ticket details.
-  - The Flask server formats this data into a message and sends it to Slack via the **STATtoSlackBot** using the configured webhook URL.
-
-### 2. Periodic Polling for Active Tickets (`ActiveTicketsBot`)
-
-- **Scheduler**: The system uses **APScheduler** to periodically fetch active tickets from a ticketing system (e.g., Trac) and send them to Slack at a configurable interval.
-- The polling frequency is defined in minutes and can be adjusted via the `/set-interval` endpoint. The interval is set by sending a POST request with the desired time in minutes (e.g., 60 for every hour).
-- The **ActiveTicketsBot** fetches the ticket data in CSV format, processes it, and sends a message to Slack with the active tickets' details.
-
-## Setting Up the Application
-
-### 1. Install Dependencies
-
-Before running the application, ensure that the following Python packages are installed:
-
-- **Flask**: Web framework for building the API.
-- **Flask-CORS**: For handling cross-origin requests.
-- **Requests**: To make HTTP requests to Slack and Trac.
-- **APScheduler**: To handle background jobs for polling active tickets.
-- **python-dotenv**: For loading environment variables.
-
-Install them using pip:
-
-```bash
-pip install Flask Flask-CORS requests apscheduler python-dotenv
-```
-
-2. Setting Up Environment Variables
-You need to set up a .env file to store sensitive information, such as Slack webhook URLs. The .env file should be placed in the root directory of your project.
-
-Create a .env file with the following contents:
-
-```bash
-# Slack Webhook URLs
-SLACK_WEBHOOK_URL=https://hooks.slack.com/triggers/your_stat_slack_webhook_url
-ACTIVE_TICKETS_WEBHOOK_URL=https://hooks.slack.com/triggers/your_active_tickets_slack_webhook_url
-
-# Optional: Set your Flask environment (default is production)
-FLASK_ENV=production
-PORT=5000
-```
-3. Running Locally
-When testing locally, you can use the provided start_standalone.sh script to configure and start everything. This script will:
-
-Set up the virtual environment.
-
-Export necessary environment variables.
-
-Start the Flask application and the Trac server.
-
-Run the script with the following command:
-
-```bash
-/opt/stat/bin/start_stat_standalone.sh
-```
-
-4. Finding the Slack Webhook URL
-To find the Slack webhook URL for your Slack workflow, follow these steps:
-
-Go to your Slack Workspace and open Slack Workflow Builder.
-
-Create a new workflow (or use an existing one) and select a trigger (e.g., when a new ticket is created or when a message is posted).
-
-Add an Action to your workflow and select Send a Webhook.
-
-Copy the Webhook URL provided by Slack.
-
-Paste the URL into your .env file in the SLACK_WEBHOOK_URL and ACTIVE_TICKETS_WEBHOOK_URL variables.
-
-6. Setting Up Polling Interval
-To set the interval for polling active tickets, you can modify the interval-select dropdown on the frontend. When the user clicks Update, the system sends the selected interval to the Flask server.
-
-The backend updates the polling interval dynamically by calling the /set-interval route. You can set the interval in hours by selecting one of the following options:
-
-1 Hour
-
-2 Hours
-
-5 Hours
-
-1 Day
-
-The system uses the selected interval to adjust the polling frequency.
-
-Error Handling
-If there is no data or invalid data provided in the form submission or when setting the interval, the system returns an appropriate error message to the user.
-
-If there are any issues connecting to Slack (e.g., timeout, network error), the system logs the error and sends a failure response.
